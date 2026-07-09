@@ -468,62 +468,72 @@ watch(
 
 <style>
 :root {
-  --primary-blue: #4f6ef7;
-  --primary-blue-dark: #425fe0;
-  --primary-blue-light: #eef6ff;
-  --primary-indigo: #7c8cff;
-  --primary-lavender: #a78bfa;
-  --primary-periwinkle: #8b9cff;
-  --star-gold: #f6c85f;
-  --sunset-orange: #ffb86b;
-  --secondary-green: #10b981;
-  --accent-orange: #ffb86b;
-  --light-blue: #eef6ff;
-  --light-green: #d1fae5;
-  --gray-50: #f7f8ff;
-  --gray-100: #f2f5ff;
-  --gray-200: #e2e8f0;
-  --gray-300: #cbd5e1;
-  --gray-400: #94a3b8;
-  --gray-500: #64748b;
-  --gray-600: #475569;
-  --gray-700: #334155;
-  --gray-800: #182033;
-  --gray-900: #182033;
-  --shadow-sm: 0 1px 2px rgba(79, 110, 247, 0.06);
-  --shadow-md: 0 16px 40px rgba(79, 110, 247, 0.12);
-  --shadow-lg: 0 18px 45px rgba(79, 110, 247, 0.16);
-  --shadow-xl: 0 24px 60px rgba(92, 75, 140, 0.14);
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(255, 255, 255, 0.55);
-  --glass-shadow: 0 18px 45px rgba(79, 110, 247, 0.16);
+  /* === Refined Design System — "Cosmic Scholar" === */
+  /* Primary: deep indigo → warm violet spectrum */
+  --primary-blue: #3B5998;
+  --primary-blue-dark: #2E4777;
+  --primary-blue-light: #EFF2F9;
+  --primary-indigo: #5B6AB5;
+  --primary-lavender: #8B7EC8;
+  --primary-periwinkle: #6B7DB3;
+  /* Gold — warmth for knowledge/book elements */
+  --star-gold: #D4A853;
+  --sunset-orange: #E07B5A;
+  --secondary-green: #3B8B7A;
+  --accent-orange: #E07B5A;
+  --light-blue: #EFF2F9;
+  --light-green: #D4EDE6;
+  /* Refined grays — warmer, more sophisticated */
+  --gray-50: #F8F7F4;
+  --gray-100: #F0EEE9;
+  --gray-200: #E2DED6;
+  --gray-300: #C8C3B8;
+  --gray-400: #9E988B;
+  --gray-500: #706A5E;
+  --gray-600: #534D43;
+  --gray-700: #3A352E;
+  --gray-800: #1E1B18;
+  --gray-900: #1E1B18;
+  /* Shadows — softer, warmer tones */
+  --shadow-sm: 0 1px 3px rgba(59, 89, 152, 0.05);
+  --shadow-md: 0 12px 32px rgba(59, 89, 152, 0.10);
+  --shadow-lg: 0 16px 40px rgba(59, 89, 152, 0.14);
+  --shadow-xl: 0 20px 52px rgba(91, 80, 130, 0.12);
+  /* Glass surfaces — warm transparency */
+  --glass-bg: rgba(255, 255, 255, 0.68);
+  --glass-border: rgba(200, 192, 175, 0.45);
+  --glass-shadow: 0 14px 38px rgba(59, 89, 152, 0.12);
+  /* Layout */
   --sidebar-width: 260px;
   --header-height: 78px;
   --content-padding: 32px;
   --card-border-radius: 18px;
-  --btn-border-radius: 8px;
-  --input-border-radius: 16px;
-  --page-bg-fill: #c5c2e3;
+  --btn-border-radius: 10px;
+  --input-border-radius: 14px;
+  /* Page background — warmer, more sophisticated */
+  --page-bg-fill: #D5CFC6;
   --page-bg-overlay:
-    linear-gradient(180deg, rgba(247, 248, 255, 0.42) 0%, rgba(243, 245, 255, 0.28) 34%, rgba(238, 242, 255, 0.44) 100%);
+    linear-gradient(180deg, rgba(248, 247, 244, 0.46) 0%, rgba(240, 238, 233, 0.32) 34%, rgba(239, 242, 249, 0.40) 100%);
   --main-visual-ratio: 0.742;
   --main-visual-overlap: 28px;
-  --dashboard-card-bg: rgba(255, 255, 255, 0.4);
-  --dashboard-card-border: rgba(190, 205, 255, 0.36);
-  --dashboard-card-shadow: 0 18px 45px rgba(79, 110, 247, 0.16);
+  /* Dashboard surfaces — refined glass */
+  --dashboard-card-bg: rgba(255, 255, 255, 0.44);
+  --dashboard-card-border: rgba(184, 175, 160, 0.34);
+  --dashboard-card-shadow: 0 14px 38px rgba(59, 89, 152, 0.12);
   --dashboard-card-blur: 18px;
-  --dashboard-book-card-bg: rgba(255, 255, 255, 0.72);
-  --dashboard-book-card-border: rgba(255, 255, 255, 0.5);
-  --dashboard-book-card-shadow: 0 16px 40px rgba(92, 75, 140, 0.1);
-  --dashboard-book-card-shadow-hover: 0 22px 48px rgba(92, 75, 140, 0.16);
-  --dashboard-mini-bg: rgba(255, 255, 255, 0.58);
-  --dashboard-mini-border: rgba(255, 255, 255, 0.55);
-  --dashboard-mini-shadow: 0 16px 40px rgba(92, 75, 140, 0.1);
-  --dashboard-subcard-bg: rgba(247, 250, 255, 0.62);
-  --dashboard-subcard-border: rgba(214, 226, 255, 0.72);
-  --dashboard-subcard-shadow: 0 10px 24px rgba(87, 103, 160, 0.08);
-  --dashboard-pill-bg: rgba(238, 246, 255, 0.78);
-  --dashboard-pill-bg-strong: rgba(238, 246, 255, 0.82);
+  --dashboard-book-card-bg: rgba(255, 255, 255, 0.68);
+  --dashboard-book-card-border: rgba(200, 192, 175, 0.42);
+  --dashboard-book-card-shadow: 0 12px 34px rgba(91, 80, 130, 0.08);
+  --dashboard-book-card-shadow-hover: 0 18px 42px rgba(91, 80, 130, 0.14);
+  --dashboard-mini-bg: rgba(255, 255, 255, 0.54);
+  --dashboard-mini-border: rgba(255, 255, 255, 0.50);
+  --dashboard-mini-shadow: 0 10px 30px rgba(91, 80, 130, 0.07);
+  --dashboard-subcard-bg: rgba(248, 246, 242, 0.60);
+  --dashboard-subcard-border: rgba(210, 202, 188, 0.66);
+  --dashboard-subcard-shadow: 0 8px 20px rgba(80, 75, 60, 0.06);
+  --dashboard-pill-bg: rgba(239, 242, 249, 0.72);
+  --dashboard-pill-bg-strong: rgba(239, 242, 249, 0.80);
+  /* Surface aliases */
   --surface-glass: var(--dashboard-card-bg);
   --surface-glass-strong: var(--dashboard-book-card-bg);
   --surface-soft: var(--dashboard-subcard-bg);
@@ -534,9 +544,10 @@ watch(
   --surface-shadow-soft: var(--dashboard-mini-shadow);
   --surface-shadow-main: var(--dashboard-card-shadow);
   --surface-shadow-nested: var(--dashboard-subcard-shadow);
-  --cta-gradient: linear-gradient(135deg, #2f80ed 0%, #7c8cff 58%, #a78bfa 100%);
-  --cta-gradient-hover: linear-gradient(135deg, #2563eb 0%, #7c8cff 58%, #a78bfa 100%);
-  --cta-shadow: 0 18px 42px rgba(92, 75, 140, 0.22), 0 10px 28px rgba(47, 128, 237, 0.18);
+  /* CTA — refined gradient using new primaries */
+  --cta-gradient: linear-gradient(135deg, #3B5998 0%, #5B6AB5 48%, #8B7EC8 100%);
+  --cta-gradient-hover: linear-gradient(135deg, #2E4777 0%, #4A58A0 48%, #7A6EB8 100%);
+  --cta-shadow: 0 16px 38px rgba(91, 80, 130, 0.20), 0 8px 22px rgba(59, 89, 152, 0.14);
 }
 
 * {
@@ -557,9 +568,9 @@ body {
   line-height: 1.6;
   color: var(--gray-800);
   background:
-    radial-gradient(circle at 16% 10%, rgba(167, 139, 250, 0.16), transparent 26%),
-    radial-gradient(circle at 86% 8%, rgba(255, 184, 107, 0.14), transparent 22%),
-    #f7f8ff;
+    radial-gradient(circle at 16% 10%, rgba(139, 126, 200, 0.12), transparent 26%),
+    radial-gradient(circle at 86% 8%, rgba(212, 168, 83, 0.10), transparent 22%),
+    #F8F7F4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -577,8 +588,8 @@ select {
   min-height: 100vh;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(247, 248, 255, 0.74), rgba(238, 242, 255, 0.86)),
-    radial-gradient(circle at 76% 18%, rgba(167, 139, 250, 0.1), transparent 30%);
+    linear-gradient(180deg, rgba(248, 247, 244, 0.74), rgba(239, 242, 249, 0.80)),
+    radial-gradient(circle at 76% 18%, rgba(139, 126, 200, 0.08), transparent 30%);
 }
 
 .main-content {

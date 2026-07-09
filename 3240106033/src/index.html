@@ -1,13 +1,455 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>鲁振哲 · 个人主页</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鲁振哲 — 个人主页</title>
+<link rel="icon" href="/favicon.ico">
+<style>
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,sans-serif;background:#FDFBF7;color:#1C2838;line-height:1.7;overflow-x:hidden}
+
+/* ===== DESIGN TOKENS ===== */
+:root{
+  --paper:#FDFBF7;--ink:#1C2838;--prussian:#2E4A62;
+  --oxide:#C44536;--parchment:#E8E2D5;--steel:#5A7D9A;
+  --prussian-light:#3D6380;--parchment-deep:#D5CFC0;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.display{font-family:"Noto Serif SC","Source Han Serif SC","STSong",serif}
+.mono{font-family:"JetBrains Mono","SF Mono","Cascadia Code",monospace;font-size:0.82em;letter-spacing:-0.02em}
+
+/* ===== NAV ===== */
+.nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;
+  background:linear-gradient(180deg,rgba(253,251,247,0.98) 60%,rgba(253,251,247,0) 100%);
+  transition:background 0.4s,box-shadow 0.4s}
+.nav.scrolled{background:rgba(253,251,247,0.97);box-shadow:0 1px 0 var(--parchment-deep)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center}
+.nav-brand{font-family:"Noto Serif SC",serif;font-size:1.1rem;font-weight:700;color:var(--prussian);letter-spacing:0.04em}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--steel);font-size:0.88rem;font-weight:500;transition:color 0.25s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--oxide);transition:width 0.25s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:120px 40px 80px;max-width:1200px;margin:0 auto;overflow:visible}
+.hero-content{flex:1;z-index:2}
+.hero-eyebrow{font-family:"JetBrains Mono",monospace;font-size:0.78rem;color:var(--oxide);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp 0.7s 0.15s forwards}
+.hero-name{font-family:"Noto Serif SC",serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:900;color:var(--ink);line-height:1.08;letter-spacing:-0.02em;opacity:0;animation:fadeUp 0.7s 0.3s forwards}
+.hero-name-en{font-size:clamp(1.1rem,2vw,1.4rem);font-weight:400;color:var(--steel);margin:8px 0 28px;font-style:italic;opacity:0;animation:fadeUp 0.7s 0.45s forwards}
+.hero-line{width:56px;height:3px;background:var(--prussian);margin-bottom:28px;opacity:0;animation:fadeUp 0.7s 0.55s forwards}
+.hero-desc{font-size:1.08rem;color:var(--steel);max-width:480px;line-height:1.9;opacity:0;animation:fadeUp 0.7s 0.65s forwards}
+.hero-desc strong{color:var(--prussian);font-weight:600}
+.hero-meta{margin-top:32px;display:flex;gap:32px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.7s 0.75s forwards}
+.hero-meta-item{display:flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--steel)}
+.hero-meta-item .label{color:var(--prussian);font-weight:600;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em}
+
+/* ===== ORBITAL RING — SIGNATURE ELEMENT ===== */
+.orbital-stage{flex:0 0 420px;height:420px;position:relative;display:flex;align-items:center;justify-content:center;z-index:1}
+@media(max-width:900px){.orbital-stage{flex:0 0 280px;height:280px}}
+@media(max-width:700px){.orbital-stage{display:none}}
+.orbital-ring{position:absolute;width:380px;height:380px;border-radius:50%;
+  border:1.5px solid transparent;
+  border-top-color:var(--oxide);
+  border-right-color:rgba(196,69,54,0.3);
+  transform:rotateX(65deg) rotateZ(-20deg);
+  animation:orbitSlow 28s linear infinite}
+.orbital-ring:nth-child(2){width:300px;height:300px;animation-duration:22s;animation-direction:reverse;
+  border-top-color:var(--prussian);border-right-color:rgba(46,74,98,0.25)}
+.orbital-ring:nth-child(3){width:220px;height:220px;animation-duration:16s;
+  border-top-color:var(--steel);border-right-color:rgba(90,125,154,0.2)}
+.orbital-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--oxide);
+  box-shadow:0 0 12px rgba(196,69,54,0.5);
+  top:0;left:50%;transform:translate(-50%,-50%)}
+.orbital-dot.prussian{background:var(--prussian);box-shadow:0 0 10px rgba(46,74,98,0.4);
+  top:50%;right:0;left:auto;transform:translate(50%,-50%)}
+
+/* ===== SECTIONS ===== */
+.section{padding:0 40px;max-width:1200px;margin:0 auto 120px}
+.section-label{font-family:"JetBrains Mono",monospace;font-size:0.72rem;color:var(--oxide);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:"Noto Serif SC",serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--ink);margin-bottom:40px;letter-spacing:-0.01em}
+
+/* ===== ABOUT GRID ===== */
+.about-grid{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr}}
+.about-avatar-wrap{text-align:center}
+.about-avatar{width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid var(--parchment-deep)}
+.about-name-zh{font-family:"Noto Serif SC",serif;font-size:1.3rem;font-weight:700;margin-top:16px}
+.about-name-en{font-size:0.85rem;color:var(--steel);font-style:italic}
+.about-contact{margin-top:20px;padding:16px;background:var(--parchment);border-radius:6px;text-align:left;font-size:0.85rem;line-height:1.9}
+.about-contact .label{font-weight:600;color:var(--prussian)}
+.about-contact a{color:var(--oxide);text-decoration:none;font-size:0.8rem;word-break:break-all}
+.about-contact a:hover{text-decoration:underline}
+
+/* ===== CARDS ===== */
+.card{background:#fff;border:1px solid var(--parchment-deep);border-radius:8px;padding:28px;margin-bottom:20px;transition:box-shadow 0.3s}
+.card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.card-title{font-family:"Noto Serif SC",serif;font-size:1.15rem;font-weight:700;color:var(--prussian);margin-bottom:6px;padding-bottom:8px;border-bottom:2px solid var(--prussian)}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.92rem}
+@media(max-width:500px){.card-grid{grid-template-columns:1fr}}
+.card-grid .label{font-weight:600;color:var(--prussian)}
+.edu-item{padding:14px 0;border-bottom:1px solid var(--parchment)}
+.edu-item:last-child{border-bottom:none}
+.edu-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.edu-school{font-weight:700;font-size:1rem}
+.edu-date{color:var(--steel);font-size:0.88rem;font-style:italic}
+.edu-major{font-size:0.92rem;color:var(--prussian);margin:4px 0}
+.edu-desc{font-size:0.85rem;color:var(--steel)}
+
+/* ===== RESEARCH ===== */
+.research-quote{border-left:3px solid var(--prussian);padding:18px 24px;background:var(--parchment);margin-bottom:36px;font-style:italic;color:var(--prussian);font-size:1.02rem;line-height:1.9}
+.research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.research-card{background:#fff;border:1px solid var(--parchment-deep);border-radius:8px;padding:28px;transition:transform 0.3s,box-shadow 0.3s}
+.research-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.08)}
+.research-icon{font-size:2rem;margin-bottom:12px}
+.research-card h3{font-size:1.08rem;font-weight:700;color:var(--prussian);margin-bottom:8px}
+.research-card p{font-size:0.9rem;color:var(--steel);line-height:1.7}
+
+/* Politics economy sub */
+.politics-card{border:1px solid var(--parchment-deep);border-radius:8px;padding:28px;background:linear-gradient(135deg,rgba(196,69,54,0.03),rgba(46,74,98,0.03));margin-top:36px}
+.politics-card h3{font-family:"Noto Serif SC",serif;font-size:1.05rem;color:var(--prussian);margin-bottom:8px}
+.politics-card>p{font-size:0.9rem;color:var(--steel);margin-bottom:20px}
+.politics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
+.politics-item{background:#fff;padding:18px;border-radius:6px;border:1px solid var(--parchment)}
+.politics-item h4{font-size:0.95rem;color:var(--prussian);margin-bottom:6px}
+.politics-item p{font-size:0.83rem;color:var(--steel);line-height:1.6}
+
+/* ===== PROJECTS ===== */
+.project-card{background:#fff;border:1px solid var(--parchment-deep);border-radius:10px;padding:36px;margin-bottom:32px;
+  position:relative;overflow:hidden;transition:box-shadow 0.35s,transform 0.35s}
+.project-card:hover{box-shadow:0 12px 36px rgba(0,0,0,0.1);transform:translateY(-2px)}
+.project-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--prussian)}
+.project-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.project-icon{font-size:2.5rem;line-height:1}
+.project-name{font-family:"Noto Serif SC",serif;font-size:1.4rem;font-weight:800;color:var(--ink)}
+.project-name-en{font-size:0.88rem;color:var(--steel);font-style:italic;margin-top:2px}
+.project-meta{text-align:right}
+.project-date{font-size:0.85rem;color:var(--steel)}
+.project-role{display:inline-block;margin-top:4px;font-size:0.78rem;background:var(--prussian);color:#fff;padding:3px 12px;border-radius:20px}
+.project-summary{font-size:0.95rem;color:var(--ink);line-height:1.8;margin-bottom:16px}
+.tech-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tech-tag{font-family:"JetBrains Mono",monospace;font-size:0.72rem;padding:4px 10px;background:var(--parchment);color:var(--prussian);border-radius:4px;letter-spacing:-0.02em}
+.project-highlights{background:var(--parchment);border-radius:8px;padding:20px 24px;margin-bottom:16px}
+.project-highlights h4{font-size:0.85rem;color:var(--prussian);font-weight:700;margin-bottom:10px}
+.project-highlights ul{padding-left:20px}
+.project-highlights li{font-size:0.88rem;color:var(--ink);line-height:2;list-style-type:"→ ";list-style-position:outside}
+.project-highlights li::marker{color:var(--oxide)}
+.project-links{display:flex;gap:12px}
+.project-link{text-decoration:none;font-size:0.85rem;color:var(--prussian);border:1px solid var(--prussian);padding:6px 18px;border-radius:6px;transition:all 0.25s}
+.project-link:hover{background:var(--prussian);color:#fff}
+
+/* ===== AWARDS ===== */
+.awards-list{display:flex;flex-direction:column;gap:14px}
+.award-item{display:flex;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid var(--parchment)}
+.award-item:last-child{border-bottom:none}
+.award-bullet{color:var(--oxide);font-size:0.7rem;flex-shrink:0}
+.award-text{font-size:0.95rem;color:var(--ink)}
+.award-tag{display:inline-block;margin-left:8px;font-size:0.78rem;font-weight:600;background:rgba(196,69,54,0.1);color:var(--oxide);padding:2px 8px;border-radius:3px}
+
+/* ===== BOOKS ===== */
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+@media(max-width:440px){.books-grid{grid-template-columns:1fr}}
+.book-card{display:flex;gap:18px;background:#fff;border:1px solid var(--parchment-deep);border-radius:8px;padding:20px;transition:box-shadow 0.3s}
+.book-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06)}
+.book-img-wrap{flex:0 0 80px;height:110px;background:var(--parchment);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.book-img{max-width:70%;max-height:85%;object-fit:contain}
+.book-info{flex:1;min-width:0}
+.book-info h4{font-size:0.95rem;font-weight:700;color:var(--prussian);margin-bottom:4px}
+.book-author{font-size:0.8rem;color:var(--steel);margin-bottom:4px}
+.book-badge{font-size:0.75rem;color:var(--oxide);font-weight:600;margin-bottom:6px}
+.book-desc{font-size:0.83rem;color:var(--steel);line-height:1.6;margin-bottom:8px;
+  padding:8px;background:var(--parchment);border-left:2px solid var(--prussian)}
+.book-link{font-size:0.78rem;color:var(--prussian);text-decoration:none;border:1px solid var(--parchment-deep);padding:3px 10px;border-radius:4px;transition:all 0.2s}
+.book-link:hover{border-color:var(--prussian);background:var(--prussian);color:#fff}
+
+/* ===== FOOTER ===== */
+.footer{text-align:center;padding:60px 40px;border-top:1px solid var(--parchment-deep)}
+.footer a{color:var(--steel);text-decoration:none;font-size:0.88rem;transition:color 0.25s}
+.footer a:hover{color:var(--oxide)}
+.footer .repo-link{display:inline-block;margin-top:12px;font-family:"JetBrains Mono",monospace;font-size:0.8rem;color:var(--prussian);padding:6px 16px;border:1px solid var(--parchment-deep);border-radius:6px}
+.footer .repo-link:hover{border-color:var(--prussian)}
+.footer p{margin-top:16px;font-size:0.83rem;color:var(--steel)}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.05s}
+.reveal-delay-2{transition-delay:0.12s}
+.reveal-delay-3{transition-delay:0.19s}
+
+/* ===== KEYFRAMES ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes orbitSlow{from{transform:rotateX(65deg) rotateZ(-20deg) rotate(0deg)}to{transform:rotateX(65deg) rotateZ(-20deg) rotate(360deg)}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .hero{flex-direction:column;padding:100px 24px 60px;min-height:auto}
+  .nav-inner{padding:0 24px}
+  .nav-links{gap:16px}
+  .nav-links a{font-size:0.8rem}
+  .section{padding:0 24px;margin-bottom:80px}
+  .project-card{padding:24px}
+  .tech-tags{gap:6px}
+}
+@media(max-width:480px){
+  .hero-name{font-size:2.4rem}
+  .nav-links{display:none}
+  .hero-meta{flex-direction:column;gap:12px}
+  .project-header{flex-direction:column}
+  .project-meta{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">鲁振哲</span>
+    <ul class="nav-links">
+      <li><a href="#about">关于</a></li>
+      <li><a href="#research">研究</a></li>
+      <li><a href="#projects">项目</a></li>
+      <li><a href="#awards">获奖</a></li>
+      <li><a href="#books">阅读</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Information Management · Data Science</div>
+    <h1 class="hero-name">鲁振哲</h1>
+    <p class="hero-name-en">Zhenzhe Lu</p>
+    <div class="hero-line"></div>
+    <p class="hero-desc">
+      浙江大学管理学院在读，主修<strong>信息管理与信息系统</strong>。
+      关注数据驱动的管理优化，致力于将分析方法与工程实践相结合。
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="label">学校</span> 浙江大学</div>
+      <div class="hero-meta-item"><span class="label">专业</span> 信息管理与信息系统</div>
+      <div class="hero-meta-item"><span class="label">Git</span> gitee.com/lu-zhenzhe/personal</div>
+    </div>
+  </div>
+
+  <!-- Orbital Ring — Signature Element -->
+  <div class="orbital-stage">
+    <div class="orbital-ring"><div class="orbital-dot"></div></div>
+    <div class="orbital-ring"><div class="orbital-dot prussian"></div></div>
+    <div class="orbital-ring"><div class="orbital-dot"></div></div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section reveal" id="about">
+  <div class="section-label">01 / 关于我</div>
+  <h2 class="section-title">教育背景与基本信息</h2>
+
+  <div class="about-grid">
+    <div class="about-avatar-wrap">
+      <img class="about-avatar" src="/images/self.jpg" alt="鲁振哲">
+      <div class="about-name-zh"></div>
+      <div class="about-name-en"></div>
+      <div class="about-contact"></div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">专业背景</div>
+        <div class="card-grid" id="infoGrid"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">教育经历</div>
+        <div id="eduList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESEARCH ===== -->
+<section class="section reveal" id="research">
+  <div class="section-label">02 / 研究方向</div>
+  <h2 class="section-title">学术兴趣</h2>
+  <div class="research-quote" id="researchQuote"></div>
+  <div class="research-grid" id="researchGrid"></div>
+  <div class="politics-card" id="politicsCard" style="display:none"></div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section class="section reveal" id="projects">
+  <div class="section-label">03 / 项目经验</div>
+  <h2 class="section-title">项目作品</h2>
+  <p style="color:var(--steel);margin-top:-28px;margin-bottom:36px;font-size:0.9rem;font-style:italic">
+    源码与文档托管于
+    <a href="https://gitee.com/lu-zhenzhe/personal" target="_blank"
+       style="color:var(--oxide);text-decoration:none;font-weight:600">gitee.com/lu-zhenzhe/personal</a>
+  </p>
+  <div id="projectList"></div>
+</section>
+
+<!-- ===== AWARDS ===== -->
+<section class="section reveal" id="awards">
+  <div class="section-label">04 / 获奖情况</div>
+  <h2 class="section-title">荣誉与奖项</h2>
+  <div class="awards-list" id="awardsList"></div>
+</section>
+
+<!-- ===== BOOKS ===== -->
+<section class="section reveal" id="books">
+  <div class="section-label">05 / 最近阅读</div>
+  <h2 class="section-title">Selected Readings</h2>
+  <div class="books-grid" id="booksGrid"></div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <a href="#">↑ 回到顶部</a><br>
+  <a class="repo-link" href="https://gitee.com/lu-zhenzhe/personal" target="_blank">
+    📂 gitee.com/lu-zhenzhe/personal
+  </a>
+  <p>© 2026 鲁振哲  |  浙江大学管理学院  |  信息管理与信息系统</p>
+</footer>
+
+<script>
+// ===== DATA LOADING =====
+async function loadData(){
+  try{
+    const[iRes,bRes]=await Promise.all([fetch('/info.json'),fetch('/books.json')]);
+    const info=iRes.ok?await iRes.json():null;
+    const books=bRes.ok?await bRes.json():[];
+    if(info)renderAll(info,books);
+    else console.error('Failed to load info.json');
+  }catch(e){console.error('Data load error:',e)}
+}
+
+// ===== RENDER ALL SECTIONS =====
+function renderAll(info,books){
+  // --- Hero ---
+  const hd=document.querySelector('.hero-desc');
+  if(hd)hd.innerHTML=`${info.school.name}在读，主修<strong>${info.major}</strong>。关注数据驱动的管理优化，致力于将分析方法与工程实践相结合。`;
+
+  // --- About ---
+  const aboutNameZh=document.querySelector('.about-name-zh');
+  const aboutNameEn=document.querySelector('.about-name-en');
+  const aboutContact=document.querySelector('.about-contact');
+  if(aboutNameZh)aboutNameZh.textContent=info.name.zh;
+  if(aboutNameEn)aboutNameEn.textContent=info.name.en;
+  if(aboutContact)aboutContact.innerHTML=`
+    <div><span class="label">邮箱</span> ${info.contact.email}</div>
+    <div><span class="label">电话</span> ${info.contact.phone}</div>
+    <div><span class="label">地址</span> ${info.contact.address}</div>
+    <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--parchment-deep)">
+      <span class="label">仓库</span>
+      <a href="${info.repository?.url||'#'}" target="_blank">${info.repository?.url||''}</a>
+    </div>`;
+
+  document.getElementById('infoGrid').innerHTML=`
+    <div><span class="label">专业</span> ${info.major}</div>
+    <div><span class="label">籍贯</span> ${info.hometown}</div>
+    <div><span class="label">入学</span> ${info.enrollment}</div>
+    <div><span class="label">毕业</span> ${info.graduation}</div>`;
+
+  document.getElementById('eduList').innerHTML=(info.education||[]).map(e=>`
+    <div class="edu-item">
+      <div class="edu-header"><span class="edu-school">${e.school}</span><span class="edu-date">${e.date}</span></div>
+      <div class="edu-major">${e.major}</div>
+      <div class="edu-desc">${e.description||''}</div>
+    </div>`).join('');
+
+  // --- Research ---
+  const r=info.research||{};
+  const rq=document.getElementById('researchQuote');
+  if(rq)rq.innerHTML=`"${r.quote||''}"`;
+  document.getElementById('researchGrid').innerHTML=(r.areas||[]).map(a=>`
+    <div class="research-card">
+      <div class="research-icon">${a.icon||'◆'}</div>
+      <h3>${a.title}</h3>
+      <p>${a.description}</p>
+    </div>`).join('');
+
+  if(r.politicalEconomy){
+    const pe=r.politicalEconomy;
+    const pc=document.getElementById('politicsCard');
+    pc.style.display='block';
+    pc.innerHTML=`
+      <h3>${pe.title}</h3>
+      <p>${pe.description}</p>
+      <div class="politics-grid">${(pe.theories||[]).map(t=>`
+        <div class="politics-item"><h4>${t.name}</h4><p>${t.description}</p></div>
+      `).join('')}</div>`;
+  }
+
+  // --- Projects ---
+  document.getElementById('projectList').innerHTML=(info.projects||[]).map(p=>`
+    <div class="project-card">
+      <div class="project-header">
+        <div style="display:flex;align-items:center;gap:16px">
+          <span class="project-icon">${p.icon||'◆'}</span>
+          <div>
+            <div class="project-name">${p.name}</div>
+            <div class="project-name-en">${p.nameEn||''}</div>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-date">${p.date||''}</div>
+          <span class="project-role">${p.role||''}</span>
+        </div>
+      </div>
+      <p class="project-summary">${p.summary||''}</p>
+      <div class="tech-tags">${(p.techStack||[]).map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div>
+      <div class="project-highlights">
+        <h4>核心亮点</h4>
+        <ul>${(p.highlights||[]).map(h=>`<li>${h}</li>`).join('')}</ul>
+      </div>
+      <div class="project-links">
+        <a class="project-link" href="${p.repoUrl||'#'}" target="_blank">源码</a>
+        <a class="project-link" href="${p.docUrl||'#'}" target="_blank">文档</a>
+      </div>
+    </div>`).join('');
+
+  // --- Awards ---
+  document.getElementById('awardsList').innerHTML=(info.awards||[]).map(a=>`
+    <div class="award-item">
+      <span class="award-bullet">●</span>
+      <span class="award-text">${a.title}${a.tag?`<span class="award-tag">${a.tag}</span>`:''}</span>
+    </div>`).join('');
+
+  // --- Books ---
+  document.getElementById('booksGrid').innerHTML=books.map(b=>`
+    <div class="book-card">
+      <div class="book-img-wrap"><img class="book-img" src="${b.image}" alt="${b.title}" loading="lazy"></div>
+      <div class="book-info">
+        <h4>${b.title}</h4>
+        <div class="book-author">${b.author} · ${b.date}</div>
+        ${b.badge?`<div class="book-badge">${b.badge}</div>`:''}
+        <div class="book-desc">${b.description}</div>
+        <a class="book-link" href="${b.buyUrl}" target="_blank">京东购买</a>
+      </div>
+    </div>`).join('');
+}
+
+// ===== SCROLL EFFECTS =====
+const nav=document.getElementById('nav');
+function onScroll(){
+  nav.classList.toggle('scrolled',window.scrollY>60);
+  document.querySelectorAll('.reveal').forEach(el=>{
+    const top=el.getBoundingClientRect().top;
+    if(top<window.innerHeight*0.88)el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('load',()=>{onScroll();loadData();});
+
+// ===== REDUCED MOTION =====
+if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  document.querySelectorAll('.orbital-ring').forEach(r=>r.style.animation='none');
+}
+</script>
+</body>
 </html>
