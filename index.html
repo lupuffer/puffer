@@ -5,237 +5,351 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>鲁振哲 — 个人主页</title>
 <style>
-/* ===== RESET ===== */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,sans-serif;background:#FDFBF7;color:#1C2838;line-height:1.7;overflow-x:hidden}
-
-/* ===== DESIGN TOKENS ===== */
-:root{
-  --paper:#FDFBF7;--ink:#1C2838;--prussian:#2E4A62;
-  --oxide:#C44536;--parchment:#E8E2D5;--steel:#5A7D9A;
-  --prussian-light:#3D6380;--parchment-deep:#D5CFC0;
+/* ============================================================
+   EVENT HORIZON — Personal Homepage Design System
+   ============================================================ */
+:root {
+  --bg:       #FAF8F5;
+  --signal:   #11151A;
+  --carrier:  #2D4A6E;
+  --pulse:    #E8553D;
+  --noise:    #E6E0D8;
+  --static:   #8C99A8;
+  --white:    #FFFFFF;
+  --carrier-light: #3A608A;
+  --pulse-dim: rgba(232,85,61,0.08);
+  --carrier-dim: rgba(45,74,110,0.06);
 }
 
-/* ===== NAV ===== */
-.nav{position:fixed;top:0;width:100%;z-index:100;padding:16px 0;
-  background:linear-gradient(180deg,rgba(253,251,247,0.98) 60%,rgba(253,251,247,0) 100%);
-  transition:background 0.4s,box-shadow 0.4s}
-.nav.scrolled{background:rgba(253,251,247,0.97);box-shadow:0 1px 0 var(--parchment-deep)}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center}
-.nav-brand{font-family:"Noto Serif SC","STSong",serif;font-size:1.1rem;font-weight:700;color:var(--prussian);letter-spacing:0.04em}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{text-decoration:none;color:var(--steel);font-size:0.88rem;font-weight:500;transition:color 0.25s;position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--oxide);transition:width 0.25s}
-.nav-links a:hover{color:var(--ink)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--signal);line-height:1.68;overflow-x:hidden;
+  font-size:16px;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.serif{font-family:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong",serif}
+.mono{font-family:"JetBrains Mono","SF Mono","Cascadia Code",monospace}
+
+/* ===== NAVIGATION ===== */
+.nav{
+  position:fixed;top:0;width:100%;z-index:100;
+  padding:18px 0;transition:all 0.4s;
+}
+.nav.scrolled{
+  background:rgba(250,248,245,0.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 1px 0 rgba(0,0,0,0.06);
+}
+.nav-inner{
+  max-width:1120px;margin:0 auto;padding:0 48px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.nav-brand{font-family:"Noto Serif SC",serif;font-size:1.05rem;font-weight:700;color:var(--carrier);letter-spacing:0.05em;}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--static);font-size:0.85rem;font-weight:500;
+  transition:color 0.3s;position:relative;padding-bottom:4px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;
+  background:var(--pulse);transition:width 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.nav-links a:hover{color:var(--signal)}
 .nav-links a:hover::after{width:100%}
 
 /* ===== HERO ===== */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:120px 40px 80px;max-width:1200px;margin:0 auto;overflow:visible}
-.hero-content{flex:1;z-index:2}
-.hero-eyebrow{font-family:"JetBrains Mono","SF Mono",monospace;font-size:0.78rem;color:var(--oxide);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px}
-.hero-name{font-family:"Noto Serif SC","STSong",serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:900;color:var(--ink);line-height:1.08;letter-spacing:-0.02em}
-.hero-name-en{font-size:clamp(1.1rem,2vw,1.4rem);font-weight:400;color:var(--steel);margin:8px 0 28px;font-style:italic}
-.hero-line{width:56px;height:3px;background:var(--prussian);margin-bottom:28px}
-.hero-desc{font-size:1.08rem;color:var(--steel);max-width:480px;line-height:1.9}
-.hero-desc strong{color:var(--prussian);font-weight:600}
-.hero-meta{margin-top:32px;display:flex;gap:32px;flex-wrap:wrap}
-.hero-meta-item{display:flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--steel)}
-.hero-meta-item .label{color:var(--prussian);font-weight:600;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em}
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:0 48px;max-width:1120px;margin:0 auto;
+  position:relative;
+}
+.hero-body{flex:1;z-index:2;padding-top:40px}
+.hero-kicker{
+  font-family:"JetBrains Mono",monospace;font-size:0.7rem;color:var(--pulse);
+  letter-spacing:0.18em;text-transform:uppercase;margin-bottom:24px;
+}
+.hero h1{
+  font-family:"Noto Serif SC",serif;
+  font-size:clamp(3.2rem,7.5vw,6rem);font-weight:900;
+  color:var(--signal);line-height:1.05;letter-spacing:-0.025em;
+}
+.hero h1 span{color:var(--carrier)}
+.hero-sub{
+  font-size:1.15rem;color:var(--static);margin:16px 0 36px;font-style:italic;
+}
+.hero-rule{width:48px;height:3px;background:var(--pulse);margin-bottom:32px;}
+.hero p.lede{
+  font-size:1.05rem;color:var(--static);max-width:460px;line-height:1.9;
+}
+.hero p.lede em{font-style:normal;color:var(--carrier);font-weight:600}
+.hero-tags{margin-top:36px;display:flex;gap:24px;flex-wrap:wrap}
+.hero-tag{font-size:0.82rem;color:var(--static)}
+.hero-tag b{color:var(--carrier);font-weight:600;text-transform:uppercase;font-size:0.7rem;letter-spacing:0.08em;display:block;margin-bottom:1px}
 
-/* ===== ORBITAL RING ===== */
-.orbital-stage{flex:0 0 420px;height:420px;position:relative;display:flex;align-items:center;justify-content:center;z-index:1}
-@media(max-width:900px){.orbital-stage{flex:0 0 280px;height:280px}}
-@media(max-width:700px){.orbital-stage{display:none}}
-.orbital-ring{position:absolute;width:380px;height:380px;border-radius:50%;
-  border:1.5px solid transparent;border-top-color:var(--oxide);border-right-color:rgba(196,69,54,0.3);
-  transform:rotateX(65deg) rotateZ(-20deg);animation:orbitSlow 28s linear infinite}
-.orbital-ring:nth-child(2){width:300px;height:300px;animation-duration:22s;animation-direction:reverse;
-  border-top-color:var(--prussian);border-right-color:rgba(46,74,98,0.25)}
-.orbital-ring:nth-child(3){width:220px;height:220px;animation-duration:16s;
-  border-top-color:var(--steel);border-right-color:rgba(90,125,154,0.2)}
-.orbital-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--oxide);
-  box-shadow:0 0 12px rgba(196,69,54,0.5);top:0;left:50%;transform:translate(-50%,-50%)}
-.orbital-dot.prussian{background:var(--prussian);box-shadow:0 0 10px rgba(46,74,98,0.4);
-  top:50%;right:0;left:auto;transform:translate(50%,-50%)}
-@keyframes orbitSlow{from{transform:rotateX(65deg) rotateZ(-20deg) rotate(0deg)}to{transform:rotateX(65deg) rotateZ(-20deg) rotate(360deg)}}
+/* Orbital stage */
+.orbit{
+  flex:0 0 480px;height:480px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+@media(max-width:900px){.orbit{flex:0 0 300px;height:300px}}
+@media(max-width:700px){.orbit{display:none}}
+.orbit-ring{
+  position:absolute;border-radius:50%;
+  border:1.5px solid transparent;
+  border-top-color:var(--pulse);
+  border-right-color:rgba(232,85,61,0.22);
+  transform:rotateX(68deg) rotateZ(-18deg);
+  animation:orbit 26s linear infinite;
+}
+.orbit-ring:nth-child(1){width:420px;height:420px;}
+.orbit-ring:nth-child(2){
+  width:330px;height:330px;animation-duration:19s;animation-direction:reverse;
+  border-top-color:var(--carrier);border-right-color:rgba(45,74,110,0.2);
+}
+.orbit-ring:nth-child(3){
+  width:240px;height:240px;animation-duration:14s;
+  border-top-color:var(--static);border-right-color:rgba(140,153,168,0.15);
+}
+.orbit-dot{
+  position:absolute;width:8px;height:8px;border-radius:50%;
+  background:var(--pulse);box-shadow:0 0 16px rgba(232,85,61,0.5);
+  top:0;left:50%;transform:translate(-50%,-50%);
+}
+.orbit-dot.carrier{
+  background:var(--carrier);box-shadow:0 0 12px rgba(45,74,110,0.35);
+  top:auto;bottom:0;right:15%;
+}
+@keyframes orbit{
+  from{transform:rotateX(68deg) rotateZ(-18deg) rotate(0deg)}
+  to{transform:rotateX(68deg) rotateZ(-18deg) rotate(360deg)}
+}
 
 /* ===== SECTIONS ===== */
-.section{padding:0 40px;max-width:1200px;margin:0 auto 100px}
-.section-label{font-family:"JetBrains Mono","SF Mono",monospace;font-size:0.72rem;color:var(--oxide);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:12px}
-.section-title{font-family:"Noto Serif SC","STSong",serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--ink);margin-bottom:36px;letter-spacing:-0.01em}
-
-/* ===== ABOUT ===== */
-.about-grid{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start}
-@media(max-width:700px){.about-grid{grid-template-columns:1fr}}
-.about-avatar-wrap{text-align:center}
-.about-avatar{width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid var(--parchment-deep);background:var(--parchment);display:flex;align-items:center;justify-content:center;font-family:"Noto Serif SC",serif;font-size:3rem;color:var(--prussian);margin:0 auto}
-.about-name-zh{font-family:"Noto Serif SC","STSong",serif;font-size:1.3rem;font-weight:700;margin-top:16px}
-.about-name-en{font-size:0.85rem;color:var(--steel);font-style:italic}
-.about-contact{margin-top:20px;padding:16px;background:var(--parchment);border-radius:6px;text-align:left;font-size:0.85rem;line-height:1.9}
-.about-contact .label{font-weight:600;color:var(--prussian)}
-.about-contact a{color:var(--oxide);text-decoration:none;font-size:0.8rem;word-break:break-all}
-.about-contact a:hover{text-decoration:underline}
-
-/* ===== CARDS ===== */
-.card{background:#fff;border:1px solid var(--parchment-deep);border-radius:8px;padding:28px;margin-bottom:20px;transition:box-shadow 0.3s}
-.card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.06)}
-.card-title{font-family:"Noto Serif SC","STSong",serif;font-size:1.15rem;font-weight:700;color:var(--prussian);margin-bottom:6px;padding-bottom:8px;border-bottom:2px solid var(--prussian)}
-.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.92rem}
-@media(max-width:500px){.card-grid{grid-template-columns:1fr}}
-.card-grid .label{font-weight:600;color:var(--prussian)}
-.edu-item{padding:14px 0;border-bottom:1px solid var(--parchment)}
-.edu-item:last-child{border-bottom:none}
-.edu-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.edu-school{font-weight:700;font-size:1rem}
-.edu-date{color:var(--steel);font-size:0.88rem;font-style:italic}
-.edu-major{font-size:0.92rem;color:var(--prussian);margin:4px 0}
-.edu-desc{font-size:0.85rem;color:var(--steel)}
-
-/* ===== RESEARCH ===== */
-.research-quote{border-left:3px solid var(--prussian);padding:18px 24px;background:var(--parchment);margin-bottom:36px;font-style:italic;color:var(--prussian);font-size:1.02rem;line-height:1.9}
-.research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.research-card{background:#fff;border:1px solid var(--parchment-deep);border-radius:8px;padding:28px;transition:transform 0.3s,box-shadow 0.3s}
-.research-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.08)}
-.research-icon{font-size:2rem;margin-bottom:12px}
-.research-card h3{font-size:1.08rem;font-weight:700;color:var(--prussian);margin-bottom:8px}
-.research-card p{font-size:0.9rem;color:var(--steel);line-height:1.7}
-
-/* ===== PROJECTS ===== */
-.project-card{background:#fff;border:1px solid var(--parchment-deep);border-radius:10px;padding:36px;margin-bottom:32px;
-  position:relative;overflow:hidden;transition:box-shadow 0.35s,transform 0.35s}
-.project-card:hover{box-shadow:0 12px 36px rgba(0,0,0,0.1);transform:translateY(-2px)}
-.project-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--prussian)}
-.project-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:16px}
-.project-icon{font-size:2.5rem;line-height:1}
-.project-name{font-family:"Noto Serif SC","STSong",serif;font-size:1.4rem;font-weight:800;color:var(--ink)}
-.project-name-en{font-size:0.88rem;color:var(--steel);font-style:italic;margin-top:2px}
-.project-meta{text-align:right}
-.project-date{font-size:0.85rem;color:var(--steel)}
-.project-role{display:inline-block;margin-top:4px;font-size:0.78rem;background:var(--prussian);color:#fff;padding:3px 12px;border-radius:20px}
-.project-summary{font-size:0.95rem;color:var(--ink);line-height:1.8;margin-bottom:16px}
-.tech-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.tech-tag{font-family:"JetBrains Mono","SF Mono",monospace;font-size:0.72rem;padding:4px 10px;background:var(--parchment);color:var(--prussian);border-radius:4px;letter-spacing:-0.02em}
-.project-highlights{background:var(--parchment);border-radius:8px;padding:20px 24px;margin-bottom:16px}
-.project-highlights h4{font-size:0.85rem;color:var(--prussian);font-weight:700;margin-bottom:10px}
-.project-highlights ul{padding-left:20px}
-.project-highlights li{font-size:0.88rem;color:var(--ink);line-height:2;list-style-type:"→ ";list-style-position:outside}
-.project-highlights li::marker{color:var(--oxide)}
-.project-links{display:flex;gap:12px}
-.project-link{text-decoration:none;font-size:0.85rem;color:var(--prussian);border:1px solid var(--prussian);padding:6px 18px;border-radius:6px;transition:all 0.25s}
-.project-link:hover{background:var(--prussian);color:#fff}
-
-/* ===== AWARDS ===== */
-.awards-list{display:flex;flex-direction:column;gap:14px}
-.award-item{display:flex;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid var(--parchment)}
-.award-item:last-child{border-bottom:none}
-.award-bullet{color:var(--oxide);font-size:0.7rem;flex-shrink:0}
-.award-text{font-size:0.95rem;color:var(--ink)}
-.award-tag{display:inline-block;margin-left:8px;font-size:0.78rem;font-weight:600;background:rgba(196,69,54,0.1);color:var(--oxide);padding:2px 8px;border-radius:3px}
-
-/* ===== RESUME SECTION ===== */
-.resume-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:24px}
-.print-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:var(--prussian);color:#fff;border:none;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;transition:background 0.25s,transform 0.2s}
-.print-btn:hover{background:#253C51;transform:translateY(-1px)}
-
-.resume-document{background:#fff;border:1px solid var(--parchment-deep);border-radius:10px;padding:48px 52px;max-width:1000px;box-shadow:0 4px 24px rgba(0,0,0,0.05)}
-@media(max-width:700px){.resume-document{padding:24px 20px}}
-.r-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;padding-bottom:20px;border-bottom:3px solid var(--prussian);margin-bottom:28px}
-.r-name{font-family:"Noto Serif SC","STSong",serif;font-size:2.2rem;font-weight:900;color:var(--ink);line-height:1.1}
-.r-name-en{font-size:0.95rem;color:var(--steel);font-style:italic;margin-top:4px}
-.r-contact{display:flex;flex-direction:column;gap:4px;font-size:0.82rem;color:var(--steel)}
-.r-body{display:grid;grid-template-columns:280px 1fr;gap:40px}
-@media(max-width:780px){.r-body{grid-template-columns:1fr}}
-.r-left{display:flex;flex-direction:column;gap:20px}
-.r-right{display:flex;flex-direction:column;gap:20px}
-.r-block{margin-bottom:4px}
-.r-block-title{font-family:"Noto Serif SC","STSong",serif;font-size:0.95rem;font-weight:800;color:var(--prussian);padding-bottom:6px;border-bottom:1.5px solid var(--prussian);margin-bottom:10px;letter-spacing:0.02em}
-.r-info-table{font-size:0.85rem}
-.r-info-table div{display:flex;padding:5px 0;border-bottom:1px dotted var(--parchment)}
-.r-info-table div:last-child{border-bottom:none}
-.r-info-table span:first-child{font-weight:600;color:var(--prussian);width:52px;flex-shrink:0}
-.r-info-table span:last-child{color:var(--ink)}
-.r-skill-group{margin-bottom:8px}
-.r-skill-group h4{font-size:0.8rem;font-weight:700;color:var(--prussian);margin-bottom:2px}
-.r-skill-group p{font-size:0.83rem;color:var(--steel)}
-.r-list{list-style:none;padding:0;font-size:0.85rem;line-height:2}
-.r-list li::before{content:'●';color:var(--oxide);font-size:0.55rem;margin-right:8px;position:relative;top:-2px}
-.r-list em{font-style:normal;font-weight:600;color:var(--oxide);font-size:0.78rem;margin-left:4px}
-.r-list-dense{font-size:0.83rem;line-height:1.85}
-.r-list-dense li::before{color:var(--prussian)}
-.r-role{font-size:0.88rem;font-weight:600;color:var(--ink);margin-bottom:4px}
-.r-role span{font-size:0.78rem;font-weight:400;background:var(--prussian);color:#fff;padding:1px 8px;border-radius:10px;margin:0 6px}
-.r-role time{font-size:0.8rem;color:var(--steel)}
-.r-desc{font-size:0.85rem;color:var(--steel);line-height:1.7}
-.r-edu-item{margin-bottom:14px}
-.r-edu-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;font-size:0.9rem}
-.r-edu-header time{font-size:0.8rem;color:var(--steel);font-style:italic}
-.r-edu-item p{font-size:0.85rem;color:var(--steel);margin:2px 0}
-.r-proj-item{margin-bottom:18px}
-.r-proj-header{display:flex;gap:10px;margin-bottom:4px}
-.r-proj-icon{font-size:1.3rem;flex-shrink:0}
-.r-proj-header strong{font-size:0.92rem;color:var(--ink)}
-.r-proj-meta{display:flex;gap:10px;margin-top:2px}
-.r-proj-meta time{font-size:0.78rem;color:var(--steel)}
-.r-proj-meta span{font-size:0.75rem;background:var(--prussian);color:#fff;padding:1px 8px;border-radius:10px}
-.r-tech{font-size:0.8rem;margin:4px 0 6px}
-.r-tech span{font-family:"JetBrains Mono","SF Mono",monospace;font-size:0.72rem;font-weight:600;color:var(--prussian);margin-right:6px}
-.r-tech{color:var(--steel)}
-.r-repo{margin-top:8px;padding:10px 14px;background:var(--parchment);border-radius:6px;font-size:0.84rem;color:var(--prussian)}
-.r-repo strong{font-family:"JetBrains Mono","SF Mono",monospace;font-size:0.78rem}
-
-/* ===== FOOTER ===== */
-.footer{text-align:center;padding:60px 40px;border-top:1px solid var(--parchment-deep)}
-.footer a{color:var(--steel);text-decoration:none;font-size:0.88rem;transition:color 0.25s}
-.footer a:hover{color:var(--oxide)}
-.footer .repo-link{display:inline-block;margin-top:12px;font-family:"JetBrains Mono","SF Mono",monospace;font-size:0.8rem;color:var(--prussian);padding:6px 16px;border:1px solid var(--parchment-deep);border-radius:6px}
-.footer .repo-link:hover{border-color:var(--prussian)}
-.footer p{margin-top:16px;font-size:0.83rem;color:var(--steel)}
+.sec{padding:0 48px;max-width:1120px;margin:0 auto 120px}
+.sec-label{
+  font-family:"JetBrains Mono",monospace;font-size:0.68rem;color:var(--pulse);
+  letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;
+}
+.sec-title{
+  font-family:"Noto Serif SC",serif;
+  font-size:clamp(1.7rem,3.5vw,2.5rem);font-weight:800;
+  color:var(--signal);margin-bottom:48px;letter-spacing:-0.01em;
+}
 
 /* ===== REVEAL ===== */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal{opacity:0;transform:translateY(36px);transition:all 0.75s cubic-bezier(0.22,1,0.36,1)}
+.reveal.on{opacity:1;transform:translateY(0)}
+
+/* ===== ABOUT ===== */
+.about-layout{display:grid;grid-template-columns:200px 1fr;gap:56px;align-items:start}
+@media(max-width:720px){.about-layout{grid-template-columns:1fr;gap:32px}}
+.about-side{text-align:center}
+.about-avatar{
+  width:160px;height:160px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--noise);background:var(--noise);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto;
+}
+.about-avatar span{
+  font-family:"Noto Serif SC",serif;font-size:2.8rem;color:var(--carrier);
+}
+.about-name{font-family:"Noto Serif SC",serif;font-size:1.25rem;font-weight:700;margin-top:16px}
+.about-name-en{font-size:0.85rem;color:var(--static);font-style:italic}
+.about-contact{
+  margin-top:20px;padding:18px;background:var(--white);
+  border:1px solid var(--noise);border-radius:8px;
+  text-align:left;font-size:0.83rem;line-height:2;
+}
+.about-contact .lbl{font-weight:600;color:var(--carrier);font-size:0.75rem}
+.about-contact a{color:var(--pulse);text-decoration:none;font-size:0.78rem;word-break:break-all}
+.about-contact a:hover{text-decoration:underline}
+
+.card{
+  background:var(--white);border:1px solid rgba(0,0,0,0.06);
+  border-radius:10px;padding:30px;margin-bottom:20px;
+}
+.card-head{
+  font-family:"Noto Serif SC",serif;font-size:1.05rem;font-weight:700;
+  color:var(--carrier);margin-bottom:4px;padding-bottom:10px;
+  border-bottom:2px solid var(--carrier);
+}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:0.9rem}
+@media(max-width:500px){.info-grid{grid-template-columns:1fr}}
+.info-grid .lbl{font-weight:600;color:var(--carrier);font-size:0.8rem}
+
+.edu-row{padding:16px 0;border-bottom:1px solid var(--noise)}
+.edu-row:last-child{border-bottom:none}
+.edu-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.edu-top strong{font-size:0.98rem;}
+.edu-top time{color:var(--static);font-size:0.83rem;font-style:italic}
+.edu-major{font-size:0.88rem;color:var(--carrier);margin:4px 0}
+.edu-desc{font-size:0.83rem;color:var(--static)}
+
+/* ===== RESEARCH ===== */
+.quote{
+  border-left:3px solid var(--carrier);padding:20px 28px;
+  background:var(--carrier-dim);margin-bottom:40px;
+  font-style:italic;color:var(--carrier);font-size:0.98rem;line-height:1.9;
+  border-radius:0 8px 8px 0;
+}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.rcard{
+  background:var(--white);border:1px solid rgba(0,0,0,0.05);border-radius:10px;
+  padding:32px 28px;transition:transform 0.3s,box-shadow 0.3s;
+}
+.rcard:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+.rcard .icon{font-size:2.2rem;margin-bottom:14px;display:block}
+.rcard h3{font-size:1.05rem;font-weight:700;color:var(--carrier);margin-bottom:8px}
+.rcard p{font-size:0.88rem;color:var(--static);line-height:1.7}
+
+/* ===== PROJECTS ===== */
+.proj{
+  background:var(--white);border:1px solid rgba(0,0,0,0.05);
+  border-radius:12px;padding:40px;margin-bottom:36px;
+  position:relative;transition:box-shadow 0.35s;
+}
+.proj:hover{box-shadow:0 16px 48px rgba(0,0,0,0.1)}
+.proj::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;
+  background:var(--carrier);border-radius:12px 0 0 12px;}
+.proj-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:14px}
+.proj-icon{font-size:2.6rem;line-height:1}
+.proj-name{font-family:"Noto Serif SC",serif;font-size:1.35rem;font-weight:800;color:var(--signal)}
+.proj-name-en{font-size:0.84rem;color:var(--static);font-style:italic;margin-top:2px}
+.proj-meta{text-align:right}
+.proj-date{font-size:0.82rem;color:var(--static)}
+.proj-role{display:inline-block;margin-top:4px;font-size:0.74rem;background:var(--carrier);color:#fff;padding:3px 14px;border-radius:20px;font-weight:600}
+.proj-summary{font-size:0.94rem;color:var(--signal);line-height:1.85;margin-bottom:18px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.tag{
+  font-family:"JetBrains Mono",monospace;font-size:0.7rem;
+  padding:5px 12px;background:var(--carrier-dim);color:var(--carrier);
+  border-radius:4px;letter-spacing:-0.02em;font-weight:500;
+}
+.highlights{
+  background:var(--carrier-dim);border-radius:8px;padding:22px 26px;margin-bottom:18px;
+}
+.highlights h4{font-size:0.82rem;color:var(--carrier);font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.05em}
+.highlights ul{padding-left:18px}
+.highlights li{font-size:0.86rem;color:var(--signal);line-height:2.1}
+.highlights li::marker{color:var(--pulse);content:'→ '}
+.proj-links{display:flex;gap:12px}
+.proj-link{
+  text-decoration:none;font-size:0.83rem;color:var(--carrier);
+  border:1.5px solid var(--carrier);padding:7px 20px;border-radius:6px;
+  transition:all 0.25s;font-weight:600;
+}
+.proj-link:hover{background:var(--carrier);color:#fff}
+
+/* ===== AWARDS ===== */
+.awards-list{max-width:720px}
+.aw-item{display:flex;align-items:baseline;gap:14px;padding:14px 0;border-bottom:1px solid var(--noise)}
+.aw-item:last-child{border-bottom:none}
+.aw-dot{color:var(--pulse);font-size:0.55rem;flex-shrink:0}
+.aw-text{font-size:0.94rem;color:var(--signal)}
+.aw-tag{display:inline-block;margin-left:10px;font-size:0.74rem;font-weight:600;
+  background:var(--pulse-dim);color:var(--pulse);padding:2px 10px;border-radius:3px;}
+
+/* ===== RESUME (print-friendly) ===== */
+.res-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:28px}
+.btn-print{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 26px;
+  background:var(--carrier);color:#fff;border:none;border-radius:8px;
+  font-size:0.88rem;font-weight:600;cursor:pointer;
+  transition:background 0.25s,transform 0.2s;
+}
+.btn-print:hover{background:#233d59;transform:translateY(-1px)}
+
+.r-doc{
+  background:var(--white);border:1px solid rgba(0,0,0,0.05);
+  border-radius:12px;padding:50px 56px;max-width:960px;box-shadow:0 4px 24px rgba(0,0,0,0.04);
+}
+@media(max-width:700px){.r-doc{padding:28px 22px}}
+.r-hd{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;padding-bottom:22px;border-bottom:3px solid var(--carrier);margin-bottom:30px}
+.r-hd h2{font-family:"Noto Serif SC",serif;font-size:2.1rem;font-weight:900;color:var(--signal)}
+.r-hd .sub{font-size:0.9rem;color:var(--static);font-style:italic;margin-top:4px}
+.r-hd .info{display:flex;flex-direction:column;gap:3px;font-size:0.81rem;color:var(--static)}
+.r-cols{display:grid;grid-template-columns:270px 1fr;gap:44px}
+@media(max-width:780px){.r-cols{grid-template-columns:1fr}}
+.r-block{margin-bottom:22px}
+.r-block h4{
+  font-family:"Noto Serif SC",serif;font-size:0.9rem;font-weight:800;
+  color:var(--carrier);padding-bottom:5px;border-bottom:1.5px solid var(--carrier);
+  margin-bottom:10px;letter-spacing:0.03em;
+}
+.r-table{font-size:0.83rem}
+.r-table div{display:flex;padding:5px 0;border-bottom:1px dotted var(--noise)}
+.r-table div:last-child{border-bottom:none}
+.r-table span:first-child{font-weight:600;color:var(--carrier);width:50px;flex-shrink:0}
+.r-skill{margin-bottom:7px}
+.r-skill h5{font-size:0.78rem;font-weight:700;color:var(--carrier);margin-bottom:2px}
+.r-skill p{font-size:0.81rem;color:var(--static)}
+.r-list{list-style:none;padding:0;font-size:0.83rem;line-height:2}
+.r-list li::before{content:'●';color:var(--pulse);font-size:0.5rem;margin-right:8px;position:relative;top:-2px}
+.r-list em{font-style:normal;font-weight:600;color:var(--pulse);font-size:0.76rem;margin-left:4px}
+.r-desc{font-size:0.83rem;color:var(--static);line-height:1.7}
+.r-repo{margin-top:10px;padding:10px 16px;background:var(--carrier-dim);border-radius:6px;font-size:0.82rem;color:var(--carrier)}
+.r-repo strong{font-family:"JetBrains Mono",monospace;font-size:0.76rem}
+.r-edu{margin-bottom:14px}
+.r-edu-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:0.88rem}
+.r-edu-top time{font-size:0.78rem;color:var(--static);font-style:italic}
+.r-edu p{font-size:0.83rem;color:var(--static);margin:2px 0}
+.r-proj{margin-bottom:16px}
+.r-proj h5{font-size:0.89rem;color:var(--signal);margin-bottom:2px}
+.r-proj .meta{display:flex;gap:10px;margin-bottom:3px}
+.r-proj .meta time{font-size:0.76rem;color:var(--static)}
+.r-proj .meta span{font-size:0.72rem;background:var(--carrier);color:#fff;padding:1px 8px;border-radius:10px}
+.r-tech{font-size:0.78rem;color:var(--static);margin:3px 0 5px}
+.r-tech b{font-family:"JetBrains Mono",monospace;font-weight:600;color:var(--carrier);font-size:0.7rem;margin-right:6px}
+
+/* ===== FOOTER ===== */
+.footer{text-align:center;padding:64px 48px;border-top:1px solid var(--noise);margin-top:40px}
+.footer a{color:var(--static);text-decoration:none;font-size:0.86rem;transition:color 0.3s}
+.footer a:hover{color:var(--pulse)}
+.footer .repo{
+  display:inline-block;margin-top:14px;font-family:"JetBrains Mono",monospace;
+  font-size:0.78rem;color:var(--carrier);padding:8px 20px;
+  border:1px solid var(--noise);border-radius:6px;transition:all 0.25s;
+}
+.footer .repo:hover{border-color:var(--carrier)}
+.footer .copy{margin-top:18px;font-size:0.82rem;color:var(--static)}
 
 /* ===== PRINT ===== */
 @media print{
-  @page{margin:15mm 12mm;size:A4}
-  body{background:#fff!important;color:#000!important;font-size:10pt;line-height:1.5}
-  .nav,.hero,.orbital-stage,.footer,.no-print,.section:not(#resume),.reveal,.print-btn,.resume-toolbar .section-title{display:none!important}
+  @page{margin:14mm 12mm;size:A4}
+  body{background:#fff!important;color:#000!important;font-size:10pt}
+  .nav,.hero,.orbit,.footer,.no-print,.sec:not(#resume){display:none!important}
   #resume{display:block!important;opacity:1!important;transform:none!important;padding:0!important;margin:0!important;max-width:100%!important}
-  .resume-document{border:none!important;box-shadow:none!important;padding:0!important;max-width:100%!important}
-  .r-header{border-bottom-color:#000!important}
-  .r-block-title{color:#000!important;border-bottom-color:#000!important}
-  .r-name{color:#000!important;font-size:20pt}
-  .r-info-table span:first-child,.r-skill-group h4,.r-tech span,.r-repo strong,.r-block-title,.r-list-dense li::before{color:#000!important}
-  .r-info-table span:last-child,.r-skill-group p,.r-desc,.r-tech,.r-contact,.r-edu-item p,.r-edu-header time,.r-proj-meta time{color:#333!important}
-  .r-list li::before{color:#000!important}
-  .r-list em{color:#000!important}
-  .r-role span,.r-proj-meta span{background:#000!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .r-repo{background:#f0f0f0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .r-doc{border:none!important;box-shadow:none!important;padding:0!important;max-width:100%!important}
+  .r-hd{border-bottom-color:#000!important}
+  .r-block h4{color:#000!important;border-bottom-color:#000!important}
 }
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
-  .hero{flex-direction:column;padding:100px 24px 60px;min-height:auto}
-  .nav-inner{padding:0 24px}
-  .nav-links{gap:16px}
+  .nav-inner{padding:0 28px}
+  .nav-links{gap:18px}
   .nav-links a{font-size:0.8rem}
-  .section{padding:0 24px;margin-bottom:80px}
-  .project-card{padding:24px}
-  .tech-tags{gap:6px}
+  .hero{flex-direction:column;padding:100px 28px 60px;min-height:auto}
+  .sec{padding:0 28px;margin-bottom:80px}
+  .proj{padding:28px}
 }
 @media(max-width:480px){
-  .hero-name{font-size:2.4rem}
   .nav-links{display:none}
-  .hero-meta{flex-direction:column;gap:12px}
-  .project-header{flex-direction:column}
-  .project-meta{text-align:left}
+  .hero h1{font-size:2.5rem}
+  .hero-tags{flex-direction:column;gap:10px}
+  .about-layout{grid-template-columns:1fr}
+  .r-cols{grid-template-columns:1fr}
+  .proj-head{flex-direction:column}
+  .proj-meta{text-align:left}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== NAVIGATION ===== -->
+<!-- ===== NAV ===== -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <span class="nav-brand">鲁振哲</span>
@@ -251,70 +365,68 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-content">
-    <div class="hero-eyebrow">Information Management · Data Science</div>
-    <h1 class="hero-name">鲁振哲</h1>
-    <p class="hero-name-en">Zhenzhe Lu</p>
-    <div class="hero-line"></div>
-    <p class="hero-desc">
-      浙江大学管理学院在读，主修<strong>信息管理与信息系统</strong>。
+  <div class="hero-body">
+    <p class="hero-kicker">Zhejiang University · School of Management</p>
+    <h1>鲁<span>振</span>哲</h1>
+    <p class="hero-sub">Zhenzhe Lu</p>
+    <div class="hero-rule"></div>
+    <p class="lede">
+      浙江大学管理学院<em>信息管理与信息系统</em>专业在读。
       关注数据驱动的管理优化，致力于将分析方法与工程实践相结合。
     </p>
-    <div class="hero-meta">
-      <div class="hero-meta-item"><span class="label">学校</span> 浙江大学</div>
-      <div class="hero-meta-item"><span class="label">专业</span> 信息管理与信息系统</div>
-      <div class="hero-meta-item"><span class="label">仓库</span> github.com/lupuffer/puffer</div>
+    <div class="hero-tags">
+      <div class="hero-tag"><b>School</b> 浙江大学管理学院</div>
+      <div class="hero-tag"><b>Major</b> 信息管理与信息系统</div>
+      <div class="hero-tag"><b>Repository</b> github.com/lupuffer/puffer</div>
     </div>
   </div>
-
-  <!-- Orbital Ring -->
-  <div class="orbital-stage">
-    <div class="orbital-ring"><div class="orbital-dot"></div></div>
-    <div class="orbital-ring"><div class="orbital-dot prussian"></div></div>
-    <div class="orbital-ring"><div class="orbital-dot"></div></div>
+  <div class="orbit">
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-ring"><div class="orbit-dot carrier"></div></div>
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
   </div>
 </section>
 
 <!-- ===== ABOUT ===== -->
-<section class="section reveal" id="about">
-  <div class="section-label">01 / 关于我</div>
-  <h2 class="section-title">教育背景与基本信息</h2>
-  <div class="about-grid">
-    <div class="about-avatar-wrap">
-      <div class="about-avatar" id="avatarEl">鲁</div>
-      <div class="about-name-zh">鲁振哲</div>
+<section class="sec reveal" id="about">
+  <p class="sec-label">01 / About</p>
+  <h2 class="sec-title">教育背景与基本信息</h2>
+  <div class="about-layout">
+    <div class="about-side">
+      <div class="about-avatar" id="avatarEl"><span>鲁</span></div>
+      <div class="about-name">鲁振哲</div>
       <div class="about-name-en">Zhenzhe Lu</div>
       <div class="about-contact">
-        <div><span class="label">邮箱</span> luzhenzhe2006@qq.com</div>
-        <div><span class="label">电话</span> 131 9968 3838</div>
-        <div><span class="label">地址</span> 浙江省杭州市浙江大学紫金港校区</div>
-        <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--parchment-deep)">
-          <span class="label">仓库</span>
+        <div><span class="lbl">邮箱</span><br>luzhenzhe2006@qq.com</div>
+        <div style="margin-top:6px"><span class="lbl">电话</span><br>131 9968 3838</div>
+        <div style="margin-top:6px"><span class="lbl">地址</span><br>浙江省杭州市浙江大学紫金港校区</div>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--noise)">
+          <span class="lbl">仓库</span><br>
           <a href="https://github.com/lupuffer/puffer" target="_blank">github.com/lupuffer/puffer</a>
         </div>
       </div>
     </div>
     <div>
       <div class="card">
-        <div class="card-title">专业背景</div>
-        <div class="card-grid">
-          <div><span class="label">专业</span> 信息管理与信息系统</div>
-          <div><span class="label">籍贯</span> 黑龙江省齐齐哈尔市龙江县</div>
-          <div><span class="label">入学</span> 2024年9月</div>
-          <div><span class="label">毕业</span> 2028年6月</div>
+        <div class="card-head">专业背景</div>
+        <div class="info-grid">
+          <div><span class="lbl">专业</span><br>信息管理与信息系统</div>
+          <div><span class="lbl">籍贯</span><br>黑龙江省齐齐哈尔市龙江县</div>
+          <div><span class="lbl">入学</span><br>2024年9月</div>
+          <div><span class="lbl">毕业</span><br>2028年6月</div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">教育经历</div>
-        <div class="edu-item">
-          <div class="edu-header"><span class="edu-school">浙江大学 (Zhejiang University)</span><span class="edu-date">2024.09 - 至今</span></div>
+        <div class="card-head">教育经历</div>
+        <div class="edu-row">
+          <div class="edu-top"><strong>浙江大学 (Zhejiang University)</strong><time>2024.09 – 至今</time></div>
           <div class="edu-major">管理学院 · 信息管理与信息系统 · 本科在读</div>
-          <div class="edu-desc">主修课程：数据结构、数据库系统、运筹学、数据分析、管理信息系统等</div>
+          <div class="edu-desc">主修：数据结构、数据库系统、运筹学、数据分析、管理信息系统等</div>
         </div>
-        <div class="edu-item">
-          <div class="edu-header"><span class="edu-school">龙江县第一中学</span><span class="edu-date">2021.09 - 2024.06</span></div>
+        <div class="edu-row">
+          <div class="edu-top"><strong>龙江县第一中学</strong><time>2021.09 – 2024.06</time></div>
           <div class="edu-major">理科高中</div>
-          <div class="edu-desc">高中阶段，培养了扎实的数学和逻辑思维能力</div>
+          <div class="edu-desc">培养了扎实的数学和逻辑思维能力</div>
         </div>
       </div>
     </div>
@@ -322,23 +434,25 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 </section>
 
 <!-- ===== RESEARCH ===== -->
-<section class="section reveal" id="research">
-  <div class="section-label">02 / 研究方向</div>
-  <h2 class="section-title">学术兴趣</h2>
-  <div class="research-quote">"深入学习数据分析 (Data Science) 与运筹优化 (Operations Research) 理论，提升统计建模与算法能力，通过数据驱动方法解决复杂管理问题。"</div>
-  <div class="research-grid">
-    <div class="research-card">
-      <div class="research-icon">📊</div>
+<section class="sec reveal" id="research">
+  <p class="sec-label">02 / Research</p>
+  <h2 class="sec-title">学术兴趣</h2>
+  <div class="quote">
+    "深入学习数据分析与运筹优化理论，提升统计建模与算法能力，通过数据驱动方法解决复杂管理问题。"
+  </div>
+  <div class="rgrid">
+    <div class="rcard">
+      <span class="icon">&#x1F4CA;</span>
       <h3>数据分析</h3>
       <p>关注统计学习、机器学习在商业决策中的应用，探索数据驱动的管理优化方法。</p>
     </div>
-    <div class="research-card">
-      <div class="research-icon">⚙️</div>
+    <div class="rcard">
+      <span class="icon">&#x2699;&#xFE0F;</span>
       <h3>运筹优化</h3>
       <p>研究数学规划、优化算法，应用于供应链管理、资源分配等实际问题。</p>
     </div>
-    <div class="research-card">
-      <div class="research-icon">🏆</div>
+    <div class="rcard">
+      <span class="icon">&#x1F3C6;</span>
       <h3>数学建模</h3>
       <p>具备扎实的数学基础，致力于跨学科的建模挑战和实际问题求解。</p>
     </div>
@@ -346,194 +460,178 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 </section>
 
 <!-- ===== PROJECTS ===== -->
-<section class="section reveal" id="projects">
-  <div class="section-label">03 / 项目经验</div>
-  <h2 class="section-title">项目作品</h2>
-  <p style="color:var(--steel);margin-top:-28px;margin-bottom:36px;font-size:0.9rem;font-style:italic">
-    源码与文档托管于
-    <a href="https://github.com/lupuffer/puffer" target="_blank"
-       style="color:var(--oxide);text-decoration:none;font-weight:600">github.com/lupuffer/puffer</a>
+<section class="sec reveal" id="projects">
+  <p class="sec-label">03 / Projects</p>
+  <h2 class="sec-title">项目作品</h2>
+  <p style="color:var(--static);margin-top:-32px;margin-bottom:36px;font-size:0.88rem;font-style:italic">
+    源码与文档：
+    <a href="https://github.com/lupuffer/puffer" target="_blank" style="color:var(--pulse);text-decoration:none;font-weight:600">github.com/lupuffer/puffer</a>
   </p>
 
-  <!-- Project 1: Trajectory -->
-  <div class="project-card">
-    <div class="project-header">
+  <div class="proj">
+    <div class="proj-head">
       <div style="display:flex;align-items:center;gap:16px">
-        <span class="project-icon">🚀</span>
+        <span class="proj-icon">&#x1F680;</span>
         <div>
-          <div class="project-name">钱学森问题扩展求解：绕日返回轨道设计</div>
-          <div class="project-name-en">Extended Tsien Trajectory: Solar-Return Orbit Design</div>
+          <div class="proj-name">钱学森问题扩展求解：绕日返回轨道设计</div>
+          <div class="proj-name-en">Extended Tsien Trajectory: Solar-Return Orbit Design</div>
         </div>
       </div>
-      <div class="project-meta">
-        <div class="project-date">2026.06</div>
-        <span class="project-role">独立完成</span>
+      <div class="proj-meta">
+        <div class="proj-date">2026.06</div>
+        <span class="proj-role">独立完成</span>
       </div>
     </div>
-    <p class="project-summary">基于钱学森《星际航行概论》框架，开发高精度N体积分器与多重打靶优化算法，实现包含月球借力与发射窗口优化的绕日返回轨道设计。</p>
-    <div class="tech-tags">
-      <span class="tech-tag">Python</span><span class="tech-tag">NumPy</span><span class="tech-tag">Matplotlib</span>
-      <span class="tech-tag">AstroPy</span><span class="tech-tag">LaTeX</span><span class="tech-tag">遗传算法</span><span class="tech-tag">N体模拟</span>
+    <p class="proj-summary">基于钱学森《星际航行概论》框架，开发高精度N体积分器与多重打靶优化算法，实现包含月球借力与发射窗口优化的绕日返回轨道设计。</p>
+    <div class="tags">
+      <span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span>
+      <span class="tag">AstroPy</span><span class="tag">LaTeX</span><span class="tag">遗传算法</span><span class="tag">N体模拟</span>
     </div>
-    <div class="project-highlights">
+    <div class="highlights">
       <h4>核心亮点</h4>
       <ul>
         <li>自研 Velocity-Verlet 辛积分器，能量漂移低至 4.32×10⁻¹⁵（1年仿真）</li>
         <li>复现钱学森拼接圆锥曲线算例，所有参数偏差 ≤ 0.1%</li>
         <li>实现遗传算法 + 并行蒙特卡洛全局优化框架</li>
-        <li>对接 JPL Horizons 真实历表进行残差校验</li>
-        <li>生成完整学术报告（LaTeX）与轨道动画（MP4）</li>
+        <li>对接 JPL Horizons 真实历表进行残差校验，生成学术报告与轨道动画</li>
       </ul>
     </div>
-    <div class="project-links">
-      <a class="project-link" href="https://github.com/lupuffer/puffer" target="_blank">项目源码</a>
+    <div class="proj-links">
+      <a class="proj-link" href="https://github.com/lupuffer/puffer" target="_blank">查看源码</a>
     </div>
   </div>
 
-  <!-- Project 2: SeekBook -->
-  <div class="project-card">
-    <div class="project-header">
+  <div class="proj">
+    <div class="proj-head">
       <div style="display:flex;align-items:center;gap:16px">
-        <span class="project-icon">📚</span>
+        <span class="proj-icon">&#x1F4DA;</span>
         <div>
-          <div class="project-name">SeekBook 二手书与知识资产流转系统</div>
-          <div class="project-name-en">SeekBook — Used Book & Knowledge Asset Circulation Platform</div>
+          <div class="proj-name">SeekBook 二手书与知识资产流转系统</div>
+          <div class="proj-name-en">SeekBook — Used Book &amp; Knowledge Asset Circulation Platform</div>
         </div>
       </div>
-      <div class="project-meta">
-        <div class="project-date">2026.05</div>
-        <span class="project-role">主要开发者</span>
+      <div class="proj-meta">
+        <div class="proj-date">2026.05</div>
+        <span class="proj-role">主要开发者</span>
       </div>
     </div>
-    <p class="project-summary">基于 Vue 3 + Flask 的全栈Web应用，构建包含十万级虚拟书籍数据的二手书交易与知识社区平台，集成ISBN智能识别与课程表知识图谱功能。</p>
-    <div class="tech-tags">
-      <span class="tech-tag">Vue 3</span><span class="tech-tag">Flask</span><span class="tech-tag">SQLAlchemy</span>
-      <span class="tech-tag">SQLite</span><span class="tech-tag">通义千问</span><span class="tech-tag">ECharts</span><span class="tech-tag">Vite</span>
+    <p class="proj-summary">Vue 3 + Flask 全栈Web应用，十万级虚拟书籍数据支撑的二手书交易与知识社区平台，集成ISBN智能识别与课程表知识图谱功能。</p>
+    <div class="tags">
+      <span class="tag">Vue 3</span><span class="tag">Flask</span><span class="tag">SQLAlchemy</span>
+      <span class="tag">SQLite</span><span class="tag">通义千问</span><span class="tag">ECharts</span><span class="tag">Vite</span>
     </div>
-    <div class="project-highlights">
+    <div class="highlights">
       <h4>核心亮点</h4>
       <ul>
-        <li>设计并实现 Blueprint 微服务工厂架构，单文件严格 ≤ 200行</li>
-        <li>开发 ISBN 双轨智能识别：通义千问 Qwen-VL 云端OCR + 文件名后门</li>
-        <li>构建知识星河社区模块（笔记发布、模糊搜索关联、评论互动）</li>
-        <li>实现课表 JSON 导入 → 智慧清单生成 → ECharts 知识星图可视化</li>
-        <li>线下对交交易模式：零余额系统，见面信息 SQLite 强持久化</li>
+        <li>Blueprint 微服务工厂架构，单文件严格 ≤ 200行</li>
+        <li>ISBN 双轨智能识别：通义千问 Qwen-VL 云端OCR + 文件名后门</li>
+        <li>知识星河社区模块（笔记发布、模糊搜索关联、评论互动）</li>
+        <li>课表JSON导入 → 智慧清单生成 → ECharts知识星图可视化</li>
+        <li>线下对交交易模式：零余额系统，见面信息SQLite强持久化</li>
       </ul>
     </div>
-    <div class="project-links">
-      <a class="project-link" href="https://github.com/lupuffer/puffer" target="_blank">项目源码</a>
+    <div class="proj-links">
+      <a class="proj-link" href="https://github.com/lupuffer/puffer" target="_blank">查看源码</a>
     </div>
   </div>
 </section>
 
 <!-- ===== RESUME ===== -->
-<section class="section reveal" id="resume">
-  <div class="section-label no-print">04 / 个人简历</div>
-  <div class="resume-toolbar no-print">
-    <h2 class="section-title" style="margin-bottom:0">个人简历</h2>
-    <button class="print-btn" onclick="window.print()">🖨 打印 / 导出PDF</button>
+<section class="sec reveal" id="resume">
+  <p class="sec-label no-print">04 / Resume</p>
+  <div class="res-toolbar no-print">
+    <h2 class="sec-title" style="margin-bottom:0">个人简历</h2>
+    <button class="btn-print" onclick="window.print()">&#x1F5A8; 打印 / 导出PDF</button>
   </div>
 
-  <div class="resume-document">
-    <div class="r-header">
+  <div class="r-doc">
+    <div class="r-hd">
       <div>
-        <h1 class="r-name">鲁振哲</h1>
-        <p class="r-name-en">Zhenzhe Lu</p>
+        <h2>鲁振哲</h2>
+        <p class="sub">Zhenzhe Lu</p>
       </div>
-      <div class="r-contact">
-        <span>📧 luzhenzhe2006@qq.com</span>
-        <span>📱 131 9968 3838</span>
-        <span>📍 浙江·杭州</span>
-        <span>🔗 github.com/lupuffer/puffer</span>
+      <div class="info">
+        <span>luzhenzhe2006@qq.com</span>
+        <span>131 9968 3838</span>
+        <span>浙江 · 杭州 · 浙大紫金港</span>
+        <span>github.com/lupuffer/puffer</span>
       </div>
     </div>
-
-    <div class="r-body">
-      <div class="r-left">
+    <div class="r-cols">
+      <div>
         <div class="r-block">
-          <h3 class="r-block-title">基本信息</h3>
-          <div class="r-info-table">
+          <h4>基本信息</h4>
+          <div class="r-table">
             <div><span>学校</span><span>浙江大学管理学院</span></div>
             <div><span>专业</span><span>信息管理与信息系统</span></div>
             <div><span>学历</span><span>本科在读</span></div>
-            <div><span>入学</span><span>2024年9月</span></div>
-            <div><span>毕业</span><span>2028年6月</span></div>
+            <div><span>入学</span><span>2024.09</span></div>
+            <div><span>毕业</span><span>2028.06</span></div>
             <div><span>籍贯</span><span>黑龙江省齐齐哈尔市</span></div>
           </div>
         </div>
         <div class="r-block">
-          <h3 class="r-block-title">技能</h3>
-          <div class="r-skill-group"><h4>编程语言</h4><p>Python, SQL, JavaScript, HTML/CSS</p></div>
-          <div class="r-skill-group"><h4>框架与工具</h4><p>Vue 3, Flask, Vite, Git, LaTeX</p></div>
-          <div class="r-skill-group"><h4>数据分析</h4><p>NumPy, Pandas, Matplotlib</p></div>
-          <div class="r-skill-group"><h4>语言能力</h4><p>CET-4 / CET-6, 普通话</p></div>
+          <h4>技能</h4>
+          <div class="r-skill"><h5>编程语言</h5><p>Python · SQL · JavaScript · HTML/CSS</p></div>
+          <div class="r-skill"><h5>框架与工具</h5><p>Vue 3 · Flask · Vite · Git · LaTeX</p></div>
+          <div class="r-skill"><h5>数据分析</h5><p>NumPy · Pandas · Matplotlib</p></div>
+          <div class="r-skill"><h5>语言能力</h5><p>CET-4 / CET-6 · 普通话</p></div>
         </div>
         <div class="r-block">
-          <h3 class="r-block-title">获奖情况</h3>
+          <h4>获奖情况</h4>
           <ul class="r-list">
             <li>全国大学生数学竞赛（非数学类B类）<em>浙江省一等奖</em></li>
             <li>微积分竞赛 <em>浙江省三等奖</em></li>
-            <li>浙江大学丹青学园篮球赛 <em>团体第一名</em></li>
+            <li>浙大丹青学园篮球赛 <em>团体第一名</em></li>
             <li>CET-4 / CET-6 <em>已通过</em></li>
           </ul>
         </div>
         <div class="r-block">
-          <h3 class="r-block-title">学生工作</h3>
-          <p class="r-role">管理学院学业指导中心 <span>干事</span> <time>2024.09 - 至今</time></p>
-          <p class="r-desc">参与学业指导中心的日常运营与活动组织，协助开展学业帮扶与经验分享活动。</p>
+          <h4>学生工作</h4>
+          <p style="font-weight:600;font-size:0.88rem">管理学院学业指导中心 <span style="font-size:0.74rem;font-weight:400;background:var(--carrier);color:#fff;padding:1px 8px;border-radius:10px;margin:0 6px">干事</span> <span style="font-size:0.78rem;color:var(--static)">2024.09 – 至今</span></p>
+          <p class="r-desc">参与学业指导中心日常运营与活动组织，协助开展学业帮扶与经验分享活动。</p>
         </div>
       </div>
-
-      <div class="r-right">
+      <div>
         <div class="r-block">
-          <h3 class="r-block-title">教育背景</h3>
-          <div class="r-edu-item">
-            <div class="r-edu-header"><strong>浙江大学（Zhejiang University）</strong><time>2024.09 - 至今</time></div>
+          <h4>教育背景</h4>
+          <div class="r-edu">
+            <div class="r-edu-top"><strong>浙江大学（Zhejiang University）</strong><time>2024.09 – 至今</time></div>
             <p>管理学院 · 信息管理与信息系统 · 本科在读</p>
             <p class="r-desc">主修：数据结构、数据库系统、运筹学、数据分析、管理信息系统等</p>
           </div>
-          <div class="r-edu-item">
-            <div class="r-edu-header"><strong>龙江县第一中学</strong><time>2021.09 - 2024.06</time></div>
+          <div class="r-edu">
+            <div class="r-edu-top"><strong>龙江县第一中学</strong><time>2021.09 – 2024.06</time></div>
             <p>理科高中 · 培养了扎实的数学和逻辑思维能力</p>
           </div>
         </div>
         <div class="r-block">
-          <h3 class="r-block-title">项目经验</h3>
-          <div class="r-proj-item">
-            <div class="r-proj-header">
-              <span class="r-proj-icon">🚀</span>
-              <div>
-                <strong>钱学森问题扩展求解：绕日返回轨道设计</strong>
-                <div class="r-proj-meta"><time>2026.06</time><span>独立完成</span></div>
-              </div>
-            </div>
+          <h4>项目经验</h4>
+          <div class="r-proj">
+            <h5>🚀 钱学森问题扩展求解：绕日返回轨道设计</h5>
+            <div class="meta"><time>2026.06</time><span>独立完成</span></div>
             <p class="r-desc">基于钱学森《星际航行概论》框架，开发高精度N体积分器与多重打靶优化算法。</p>
-            <p class="r-tech"><span>技术栈</span> Python, NumPy, Matplotlib, AstroPy, LaTeX, 遗传算法, N体模拟</p>
-            <ul class="r-list r-list-dense">
+            <p class="r-tech"><b>技术栈</b> Python · NumPy · Matplotlib · AstroPy · LaTeX · 遗传算法 · N体模拟</p>
+            <ul class="r-list" style="font-size:0.81rem;line-height:1.85">
               <li>自研 Velocity-Verlet 辛积分器，能量漂移低至 4.32×10⁻¹⁵</li>
               <li>复现钱学森拼接圆锥曲线算例，参数偏差 ≤ 0.1%</li>
               <li>遗传算法 + 并行蒙特卡洛全局优化，对接JPL Horizons历表校验</li>
             </ul>
           </div>
-          <div class="r-proj-item">
-            <div class="r-proj-header">
-              <span class="r-proj-icon">📚</span>
-              <div>
-                <strong>SeekBook 二手书与知识资产流转系统</strong>
-                <div class="r-proj-meta"><time>2026.05</time><span>主要开发者</span></div>
-              </div>
-            </div>
-            <p class="r-desc">Vue 3 + Flask 全栈Web应用，十万级虚拟书籍数据的二手书交易与知识社区平台。</p>
-            <p class="r-tech"><span>技术栈</span> Vue 3, Flask, SQLAlchemy, SQLite, 通义千问 Qwen-VL, ECharts, Vite</p>
-            <ul class="r-list r-list-dense">
-              <li>Blueprint微服务工厂架构，单文件严格 ≤ 200行</li>
-              <li>ISBN双轨识别：通义千问云端OCR + 文件名后门</li>
-              <li>知识星河社区、课表知识图谱、零余额线下对交系统</li>
+          <div class="r-proj">
+            <h5>📚 SeekBook 二手书与知识资产流转系统</h5>
+            <div class="meta"><time>2026.05</time><span>主要开发者</span></div>
+            <p class="r-desc">Vue 3 + Flask 全栈应用，十万级虚拟书籍数据的二手书交易与知识社区平台。</p>
+            <p class="r-tech"><b>技术栈</b> Vue 3 · Flask · SQLAlchemy · SQLite · 通义千问 · ECharts · Vite</p>
+            <ul class="r-list" style="font-size:0.81rem;line-height:1.85">
+              <li>Blueprint微服务架构，单文件 ≤ 200行</li>
+              <li>ISBN双轨识别 + 知识星河社区 + 课表知识图谱</li>
+              <li>零余额线下对交系统，SQLite强持久化</li>
             </ul>
           </div>
         </div>
         <div class="r-block">
-          <h3 class="r-block-title">研究方向</h3>
+          <h4>研究方向</h4>
           <ul class="r-list">
             <li><strong>数据分析</strong> — 统计学习、机器学习在商业决策中的应用</li>
             <li><strong>运筹优化</strong> — 数学规划、优化算法，供应链与资源分配</li>
@@ -541,8 +639,8 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
           </ul>
         </div>
         <div class="r-block">
-          <h3 class="r-block-title">自我评价</h3>
-          <p class="r-desc">本科在读，主修信息管理与信息系统。关注数据分析、运筹优化与数学建模方向，具备扎实的数学基础。熟悉Python科学计算与Vue全栈开发，具备独立完成复杂项目的能力。</p>
+          <h4>自我评价</h4>
+          <p class="r-desc">本科在读，主修信息管理与信息系统。关注数据分析、运筹优化与数学建模方向，具备扎实的数学基础。熟悉Python科学计算与Vue全栈开发，具备独立完成复杂项目的能力。善于沟通协作，乐于探索新技术。</p>
           <p class="r-repo">📂 所有项目源码托管于 <strong>github.com/lupuffer/puffer</strong></p>
         </div>
       </div>
@@ -551,47 +649,67 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 </section>
 
 <!-- ===== AWARDS ===== -->
-<section class="section reveal" id="awards">
-  <div class="section-label">05 / 获奖情况</div>
-  <h2 class="section-title">荣誉与奖项</h2>
+<section class="sec reveal" id="awards">
+  <p class="sec-label">05 / Awards</p>
+  <h2 class="sec-title">荣誉与奖项</h2>
   <div class="awards-list">
-    <div class="award-item"><span class="award-bullet">●</span><span class="award-text">全国大学生数学竞赛（非数学类B类）<span class="award-tag">浙江省一等奖</span></span></div>
-    <div class="award-item"><span class="award-bullet">●</span><span class="award-text">微积分竞赛<span class="award-tag">浙江省三等奖</span></span></div>
-    <div class="award-item"><span class="award-bullet">●</span><span class="award-text">浙江大学丹青学园团总支篮球赛<span class="award-tag">作为队员获得比赛第一名</span></span></div>
-    <div class="award-item"><span class="award-bullet">●</span><span class="award-text">CET-4 / CET-6 英语等级测试已通过</span></div>
-    <div class="award-item"><span class="award-bullet">●</span><span class="award-text">高中阶段多次获得校级三好学生</span></div>
+    <div class="aw-item">
+      <span class="aw-dot">●</span>
+      <span class="aw-text">全国大学生数学竞赛（非数学类B类）<span class="aw-tag">浙江省一等奖</span></span>
+    </div>
+    <div class="aw-item">
+      <span class="aw-dot">●</span>
+      <span class="aw-text">微积分竞赛<span class="aw-tag">浙江省三等奖</span></span>
+    </div>
+    <div class="aw-item">
+      <span class="aw-dot">●</span>
+      <span class="aw-text">浙江大学丹青学园团总支篮球赛<span class="aw-tag">团体第一名</span></span>
+    </div>
+    <div class="aw-item">
+      <span class="aw-dot">●</span>
+      <span class="aw-text">CET-4 / CET-6 英语等级测试已通过</span>
+    </div>
+    <div class="aw-item">
+      <span class="aw-dot">●</span>
+      <span class="aw-text">高中阶段多次获得校级三好学生</span>
+    </div>
   </div>
 </section>
 
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
   <a href="#">↑ 回到顶部</a><br>
-  <a class="repo-link" href="https://github.com/lupuffer/puffer" target="_blank">
-    📂 github.com/lupuffer/puffer
-  </a>
-  <p>© 2026 鲁振哲  |  浙江大学管理学院  |  信息管理与信息系统</p>
+  <a class="repo" href="https://github.com/lupuffer/puffer" target="_blank">github.com/lupuffer/puffer</a>
+  <p class="copy">&copy; 2026 鲁振哲 &nbsp;|&nbsp; 浙江大学管理学院 &nbsp;|&nbsp; 信息管理与信息系统</p>
 </footer>
 
 <script>
-// ===== Scroll reveal =====
-const nav=document.getElementById('nav');
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+// Scroll
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){
+  nav.classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
 
-// ===== Try to load avatar image =====
+// Reveal
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('on');});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// Avatar
 (function(){
   var img=document.createElement('img');
-  img.onload=function(){var a=document.getElementById('avatarEl');a.textContent='';a.appendChild(img);img.style.width='100%';img.style.height='100%';img.style.borderRadius='50%';img.style.objectFit='cover';};
-  img.onerror=function(){/* keep initials */};
+  img.onload=function(){
+    var a=document.getElementById('avatarEl');
+    a.innerHTML='';a.appendChild(img);
+    img.style.cssText='width:100%;height:100%;border-radius:50%;object-fit:cover';
+  };
   img.src='images/self.jpg';
 })();
 
-// ===== Reduced motion =====
+// Reduced motion
 if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
-  document.querySelectorAll('.orbital-ring').forEach(r=>r.style.animation='none');
+  document.querySelectorAll('.orbit-ring').forEach(function(r){r.style.animation='none';});
 }
 </script>
 </body>
