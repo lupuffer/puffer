@@ -150,22 +150,6 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 .award-text{font-size:0.95rem;color:var(--ink)}
 .award-tag{display:inline-block;margin-left:8px;font-size:0.78rem;font-weight:600;background:rgba(196,69,54,0.1);color:var(--oxide);padding:2px 8px;border-radius:3px}
 
-/* ===== BOOKS ===== */
-.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
-@media(max-width:440px){.books-grid{grid-template-columns:1fr}}
-.book-card{display:flex;gap:18px;background:#fff;border:1px solid var(--parchment-deep);border-radius:8px;padding:20px;transition:box-shadow 0.3s}
-.book-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06)}
-.book-img-wrap{flex:0 0 80px;height:110px;background:var(--parchment);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.book-img{max-width:70%;max-height:85%;object-fit:contain}
-.book-info{flex:1;min-width:0}
-.book-info h4{font-size:0.95rem;font-weight:700;color:var(--prussian);margin-bottom:4px}
-.book-author{font-size:0.8rem;color:var(--steel);margin-bottom:4px}
-.book-badge{font-size:0.75rem;color:var(--oxide);font-weight:600;margin-bottom:6px}
-.book-desc{font-size:0.83rem;color:var(--steel);line-height:1.6;margin-bottom:8px;
-  padding:8px;background:var(--parchment);border-left:2px solid var(--prussian)}
-.book-link{font-size:0.78rem;color:var(--prussian);text-decoration:none;border:1px solid var(--parchment-deep);padding:3px 10px;border-radius:4px;transition:all 0.2s}
-.book-link:hover{border-color:var(--prussian);background:var(--prussian);color:#fff}
-
 /* ===== FOOTER ===== */
 .footer{text-align:center;padding:60px 40px;border-top:1px solid var(--parchment-deep)}
 .footer a{color:var(--steel);text-decoration:none;font-size:0.88rem;transition:color 0.25s}
@@ -294,7 +278,6 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
       <li><a href="#projects">项目</a></li>
       <li><a href="#resume">简历</a></li>
       <li><a href="#awards">获奖</a></li>
-      <li><a href="#books">阅读</a></li>
     </ul>
   </div>
 </nav>
@@ -374,7 +357,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 
 <!-- ===== RESUME ===== -->
 <section class="section reveal" id="resume">
-  <div class="section-label no-print">06 / 个人简历</div>
+  <div class="section-label no-print">04 / 个人简历</div>
   <div class="resume-toolbar no-print">
     <h2 class="section-title" style="margin-bottom:0">个人简历</h2>
     <button class="print-btn" onclick="window.print()" title="打印或保存为PDF">
@@ -530,16 +513,9 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 
 <!-- ===== AWARDS ===== -->
 <section class="section reveal" id="awards">
-  <div class="section-label">04 / 获奖情况</div>
+  <div class="section-label">05 / 获奖情况</div>
   <h2 class="section-title">荣誉与奖项</h2>
   <div class="awards-list" id="awardsList"></div>
-</section>
-
-<!-- ===== BOOKS ===== -->
-<section class="section reveal" id="books">
-  <div class="section-label">05 / 最近阅读</div>
-  <h2 class="section-title">Selected Readings</h2>
-  <div class="books-grid" id="booksGrid"></div>
 </section>
 
 <!-- ===== FOOTER ===== -->
@@ -555,16 +531,15 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 // ===== DATA LOADING =====
 async function loadData(){
   try{
-    const[iRes,bRes]=await Promise.all([fetch('/info.json'),fetch('/books.json')]);
+    const iRes=await fetch('/info.json');
     const info=iRes.ok?await iRes.json():null;
-    const books=bRes.ok?await bRes.json():[];
-    if(info)renderAll(info,books);
+    if(info)renderAll(info);
     else console.error('Failed to load info.json');
   }catch(e){console.error('Data load error:',e)}
 }
 
 // ===== RENDER ALL SECTIONS =====
-function renderAll(info,books){
+function renderAll(info){
   // --- Hero ---
   const hd=document.querySelector('.hero-desc');
   if(hd)hd.innerHTML=`${info.school.name}在读，主修<strong>${info.major}</strong>。关注数据驱动的管理优化，致力于将分析方法与工程实践相结合。`;
@@ -655,18 +630,6 @@ function renderAll(info,books){
       <span class="award-text">${a.title}${a.tag?`<span class="award-tag">${a.tag}</span>`:''}</span>
     </div>`).join('');
 
-  // --- Books ---
-  document.getElementById('booksGrid').innerHTML=books.map(b=>`
-    <div class="book-card">
-      <div class="book-img-wrap"><img class="book-img" src="${b.image}" alt="${b.title}" loading="lazy"></div>
-      <div class="book-info">
-        <h4>${b.title}</h4>
-        <div class="book-author">${b.author} · ${b.date}</div>
-        ${b.badge?`<div class="book-badge">${b.badge}</div>`:''}
-        <div class="book-desc">${b.description}</div>
-        <a class="book-link" href="${b.buyUrl}" target="_blank">京东购买</a>
-      </div>
-    </div>`).join('');
 }
 
 // ===== SCROLL EFFECTS =====
