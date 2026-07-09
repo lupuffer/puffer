@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>鲁振哲 — 个人主页</title>
-<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="favicon.ico">
 <style>
 /* ===== RESET ===== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -315,7 +315,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 
   <div class="about-grid">
     <div class="about-avatar-wrap">
-      <img class="about-avatar" src="/images/self.jpg" alt="鲁振哲">
+      <img class="about-avatar" src="images/self.jpg" alt="鲁振哲">
       <div class="about-name-zh"></div>
       <div class="about-name-en"></div>
       <div class="about-contact"></div>
@@ -531,7 +531,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 // ===== DATA LOADING =====
 async function loadData(){
   try{
-    const iRes=await fetch('/info.json');
+    const iRes=await fetch('info.json');
     const info=iRes.ok?await iRes.json():null;
     if(info)renderAll(info);
     else console.error('Failed to load info.json');
