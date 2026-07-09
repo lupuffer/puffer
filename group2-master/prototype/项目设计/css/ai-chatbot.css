@@ -1,0 +1,691 @@
+/* AI客服样式 */
+
+
+
+/* AI客服头部 */
+.ai-chatbot-section {
+    margin-bottom: 60px;
+}
+
+.chatbot-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: linear-gradient(135deg, var(--primary-blue), #3b82f6);
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+
+.chatbot-avatar {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+}
+
+.chatbot-info h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chatbot-info .subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 16px;
+}
+
+.chatbot-stats {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.stat-item strong {
+    font-weight: 600;
+}
+
+/* 聊天容器 */
+.chatbot-container {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 24px;
+    height: 600px;
+}
+
+.chat-area {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    background-color: var(--gray-50);
+}
+
+/* 消息样式 */
+.message {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bot-message .message-avatar {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.user-message .message-avatar {
+    background-color: var(--secondary-green);
+    color: white;
+}
+
+.message-content {
+    flex: 1;
+    max-width: 80%;
+}
+
+.message-text {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    line-height: 1.6;
+}
+
+.bot-message .message-text {
+    border-top-left-radius: 4px;
+}
+
+.user-message .message-text {
+    background-color: var(--primary-blue);
+    color: white;
+    border-top-right-radius: 4px;
+}
+
+.message-text ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.message-text li {
+    margin-bottom: 6px;
+}
+
+.message-time {
+    font-size: 12px;
+    color: var(--gray-500);
+    margin-top: 6px;
+    text-align: right;
+}
+
+/* 快捷问题 */
+.quick-questions {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--gray-200);
+}
+
+.quick-questions h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 12px;
+}
+
+.quick-question-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.quick-question-btn {
+    padding: 12px;
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.quick-question-btn:hover {
+    background-color: var(--light-blue);
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+/* 输入区域 */
+.chat-input-area {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+    background: white;
+    border-top: 1px solid var(--gray-200);
+}
+
+.input-container {
+    flex: 1;
+    position: relative;
+}
+
+.message-input {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    border: 2px solid var(--gray-200);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.message-input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+}
+
+.input-actions {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.input-action-btn {
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    padding: 4px;
+    font-size: 16px;
+    transition: color 0.2s ease;
+}
+
+.input-action-btn:hover {
+    color: var(--primary-blue);
+}
+
+.send-btn {
+    padding: 0 24px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.send-btn:hover {
+    background-color: #1e40af;
+}
+
+/* 侧边栏 */
+.chat-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+}
+
+.sidebar-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 推荐卡片 */
+.recommendation-card {
+    background-color: var(--gray-50);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.recommendation-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 12px;
+}
+
+.recommended-book {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.recommended-book:last-child {
+    border-bottom: none;
+}
+
+.recommended-book i {
+    color: var(--primary-blue);
+    font-size: 18px;
+}
+
+.book-details {
+    flex: 1;
+}
+
+.book-details strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.book-price {
+    font-size: 14px;
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+/* 课程匹配 */
+.course-match p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-bottom: 12px;
+}
+
+.course-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.course-tag {
+    padding: 6px 12px;
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* 客服选项 */
+.support-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.support-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background-color: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.support-option:hover {
+    background-color: var(--light-blue);
+    border-color: var(--primary-blue);
+}
+
+.support-option i {
+    font-size: 20px;
+    color: var(--primary-blue);
+}
+
+.support-option div {
+    flex: 1;
+}
+
+.support-option strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.support-option small {
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+/* 评分区域 */
+.rating-section p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-bottom: 12px;
+}
+
+.rating-stars {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.rating-stars i {
+    font-size: 24px;
+    color: var(--gray-300);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.rating-stars i:hover,
+.rating-stars i.active {
+    color: var(--accent-orange);
+}
+
+/* 智能推荐模块 */
+.smart-recommendation-section {
+    margin-top: 60px;
+}
+
+.recommendation-interface {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.upload-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--shadow-md);
+}
+
+.upload-card {
+    text-align: center;
+}
+
+.upload-card i {
+    font-size: 48px;
+    color: var(--primary-blue);
+    margin-bottom: 16px;
+}
+
+.upload-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.upload-card p {
+    color: var(--gray-600);
+    margin-bottom: 24px;
+}
+
+.upload-zone {
+    border: 2px dashed var(--gray-300);
+    border-radius: 12px;
+    padding: 40px 20px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.upload-zone:hover {
+    border-color: var(--primary-blue);
+}
+
+.upload-zone i {
+    font-size: 36px;
+    color: var(--gray-400);
+    margin-bottom: 12px;
+}
+
+.upload-zone p {
+    color: var(--gray-500);
+    margin-bottom: 16px;
+}
+
+.upload-tips {
+    text-align: left;
+    margin-top: 24px;
+}
+
+.upload-tips h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--gray-700);
+}
+
+.upload-tips ul {
+    padding-left: 20px;
+    color: var(--gray-600);
+    font-size: 14px;
+}
+
+.upload-tips li {
+    margin-bottom: 8px;
+}
+
+/* 推荐结果 */
+.recommendation-results {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.results-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.results-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.results-container {
+    padding: 30px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray-500);
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: var(--gray-300);
+}
+
+.empty-state h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--gray-700);
+}
+
+.empty-state p {
+    margin-bottom: 24px;
+}
+
+/* 推荐策略 */
+.recommendation-strategy {
+    margin-top: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--light-blue), #e0f2fe);
+    border-radius: 12px;
+}
+
+.recommendation-strategy h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.strategy-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+}
+
+.strategy-card:hover {
+    transform: translateY(-4px);
+}
+
+.strategy-card i {
+    font-size: 32px;
+    color: var(--primary-blue);
+    margin-bottom: 12px;
+}
+
+.strategy-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.strategy-card p {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .chatbot-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .chat-sidebar {
+        grid-template-columns: repeat(2, 1fr);
+        display: grid;
+    }
+    
+    .recommendation-interface {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .chatbot-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .chatbot-stats {
+        justify-content: center;
+    }
+    
+    .quick-question-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chat-sidebar {
+        grid-template-columns: 1fr;
+    }
+    
+    .strategy-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chat-input-area {
+        flex-direction: column;
+    }
+    
+    .send-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,46 @@
+{
+  "profile": "软件工程项目型课表",
+  "semester": "2026-2027 秋冬学期",
+  "courses": [
+    {
+      "name": "软件工程",
+      "day": "周一",
+      "time": "3-4节",
+      "teacher": "李教授",
+      "weeks": "1-16周",
+      "credits": "3"
+    },
+    {
+      "name": "Web前端开发",
+      "day": "周二",
+      "time": "6-8节",
+      "teacher": "黄老师",
+      "weeks": "1-16周",
+      "credits": "3"
+    },
+    {
+      "name": "操作系统",
+      "day": "周三",
+      "time": "1-2节",
+      "teacher": "孙老师",
+      "weeks": "1-16周",
+      "credits": "4"
+    },
+    {
+      "name": "计算机网络",
+      "day": "周四",
+      "time": "3-4节",
+      "teacher": "郑老师",
+      "weeks": "1-16周",
+      "credits": "3.5"
+    },
+    {
+      "name": "项目管理与实践",
+      "day": "周五",
+      "time": "5-6节",
+      "teacher": "刘老师",
+      "weeks": "3-16周",
+      "credits": "2"
+    }
+  ]
+}

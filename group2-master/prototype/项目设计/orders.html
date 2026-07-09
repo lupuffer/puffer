@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的订单 - 星辰书链</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="layout-sidebar">
+    <!-- 左侧固定导航栏 -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>星辰书链</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-link "><i class="fas fa-home"></i><span>首页</span></a>
+            <a href="buy.html" class="nav-link "><i class="fas fa-shopping-cart"></i><span>我要买书</span></a>
+            <a href="sell.html" class="nav-link "><i class="fas fa-tag"></i><span>我要卖书</span></a>
+            <a href="knowledge.html" class="nav-link "><i class="fas fa-graduation-cap"></i><span>知识遗产社区</span></a>
+            <a href="messages.html" class="nav-link "><i class="fas fa-comments"></i><span>消息中心</span></a>
+            <a href="profile.html" class="nav-link active"><i class="fas fa-user"></i><span>个人中心</span></a>
+        </nav>
+        <div class="sidebar-user">
+            <div class="user-info">
+                <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+                <div class="user-details">
+                    <span class="user-name">请登录</span>
+                    <span class="user-badge"><i class="fas fa-check-circle"></i> 浙大认证</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="content-header">
+            <div class="header-left">
+                <h1 class="page-title">我的订单</h1>
+                <div class="header-search">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="输入书籍名称检索..." class="header-search-input">
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="header-btn btn-notification" title="消息中心"><i class="fas fa-bell"></i><span class="notification-dot"></span></button>
+                <button class="header-btn btn-publish" onclick="location.href='publish-sell.html'"><i class="fas fa-plus"></i>发布卖书</button>
+            </div>
+        </header>
+
+        <div class="content-body">
+        <!-- 订单头部 -->
+        <section class="orders-header">
+            <h1><i class="fas fa-clipboard-list"></i> 我的订单</h1>
+            <p>管理您的所有交易订单，跟踪订单状态</p>
+            <div class="orders-stats">
+                <div class="stat-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>3</strong>
+                        <span>进行中</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>12</strong>
+                        <span>已完成</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <div>
+                        <strong>4.8</strong>
+                        <span>平均评分</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-percentage"></i>
+                    <div>
+                        <strong>95%</strong>
+                        <span>完成率</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 订单筛选 -->
+        <section class="orders-filter">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-status="all">全部订单</button>
+                <button class="filter-tab" data-status="pending">待沟通</button>
+                <button class="filter-tab" data-status="confirmed">待确认</button>
+                <button class="filter-tab" data-status="delivery">待交付</button>
+                <button class="filter-tab" data-status="completed">已完成</button>
+                <button class="filter-tab" data-status="cancelled">已取消</button>
+                <button class="filter-tab" data-status="dispute">交易纠纷</button>
+            </div>
+            <div class="filter-search">
+                <input type="text" placeholder="搜索订单号、书名或交易方..." class="search-input">
+                <button class="btn btn-primary">
+                    <i class="fas fa-search"></i> 搜索
+                </button>
+            </div>
+        </section>
+
+        <!-- 订单列表 -->
+        <section class="orders-list">
+            <!-- 进行中订单 -->
+            <div class="order-section">
+                <h3><i class="fas fa-spinner"></i> 进行中订单</h3>
+                <div class="order-cards">
+                    <div class="order-card status-pending">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <strong>订单号: #20230415001</strong>
+                                <span class="order-time">创建时间: 2023-04-15 14:30</span>
+                            </div>
+                            <div class="order-status">
+                                <span class="status-badge">待沟通</span>
+                            </div>
+                        </div>
+                        <div class="order-content">
+                            <div class="order-book">
+                                <div class="book-image">
+                                    <img src="https://via.placeholder.com/80x100/4A90E2/FFFFFF?text=数据结构" alt="数据结构">
+                                </div>
+                                <div class="book-details">
+                                    <h4>数据结构（C语言版）</h4>
+                                    <p>作者: 严蔚敏</p>
+                                    <p>ISBN: 9787302147510</p>
+                                </div>
+                            </div>
+                            <div class="order-partner">
+                                <div class="partner-info">
+                                    <i class="fas fa-user-circle"></i>
+                                    <div>
+                                        <strong>张同学</strong>
+                                        <span>紫金港校区 · 信誉等级: A+</span>
+                                    </div>
+                                </div>
+                                <div class="partner-contact">
+                                    <button class="btn btn-outline btn-sm" onclick="location.href='messages.html'">
+                                        <i class="fas fa-comment"></i> 联系卖家
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="order-details">
+                                <div class="detail-item">
+                                    <span>价格</span>
+                                    <strong>¥35.00</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>交易方式</span>
+                                    <strong>当面交易</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>校区</span>
+                                    <strong>紫金港校区</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline" onclick="cancelOrder(1)">
+                                <i class="fas fa-times"></i> 取消订单
+                            </button>
+                            <button class="btn btn-primary" onclick="confirmOrder(1)">
+                                <i class="fas fa-check"></i> 确认交易
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="order-card status-confirmed">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <strong>订单号: #20230414002</strong>
+                                <span class="order-time">创建时间: 2023-04-14 10:15</span>
+                            </div>
+                            <div class="order-status">
+                                <span class="status-badge">待确认</span>
+                            </div>
+                        </div>
+                        <div class="order-content">
+                            <div class="order-book">
+                                <div class="book-image">
+                                    <img src="https://via.placeholder.com/80x100/50C878/FFFFFF?text=算法导论" alt="算法导论">
+                                </div>
+                                <div class="book-details">
+                                    <h4>算法导论</h4>
+                                    <p>作者: Thomas H. Cormen</p>
+                                    <p>ISBN: 9787111187776</p>
+                                </div>
+                            </div>
+                            <div class="order-partner">
+                                <div class="partner-info">
+                                    <i class="fas fa-user-circle"></i>
+                                    <div>
+                                        <strong>李同学</strong>
+                                        <span>玉泉校区 · 信誉等级: A</span>
+                                    </div>
+                                </div>
+                                <div class="partner-contact">
+                                    <button class="btn btn-outline btn-sm" onclick="location.href='messages.html'">
+                                        <i class="fas fa-comment"></i> 联系买家
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="order-details">
+                                <div class="detail-item">
+                                    <span>价格</span>
+                                    <strong>¥85.00</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>交易方式</span>
+                                    <strong>邮寄交易</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>校区</span>
+                                    <strong>玉泉校区</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline" onclick="cancelOrder(2)">
+                                <i class="fas fa-times"></i> 取消订单
+                            </button>
+                            <button class="btn btn-primary" onclick="confirmDelivery(2)">
+                                <i class="fas fa-truck"></i> 确认交付
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 已完成订单 -->
+            <div class="order-section">
+                <h3><i class="fas fa-check-circle"></i> 已完成订单</h3>
+                <div class="order-cards">
+                    <div class="order-card status-completed">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <strong>订单号: #20230410003</strong>
+                                <span class="order-time">完成时间: 2023-04-12 16:45</span>
+                            </div>
+                            <div class="order-status">
+                                <span class="status-badge">已完成</span>
+                            </div>
+                        </div>
+                        <div class="order-content">
+                            <div class="order-book">
+                                <div class="book-image">
+                                    <img src="https://via.placeholder.com/80x100/FF6B6B/FFFFFF?text=高等数学" alt="高等数学">
+                                </div>
+                                <div class="book-details">
+                                    <h4>高等数学（第七版）</h4>
+                                    <p>作者: 同济大学数学系</p>
+                                    <p>ISBN: 9787040396638</p>
+                                </div>
+                            </div>
+                            <div class="order-partner">
+                                <div class="partner-info">
+                                    <i class="fas fa-user-circle"></i>
+                                    <div>
+                                        <strong>王同学</strong>
+                                        <span>紫金港校区 · 信誉等级: A+</span>
+                                    </div>
+                                </div>
+                                <div class="partner-rating">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="rating-text">4.5分</span>
+                                </div>
+                            </div>
+                            <div class="order-details">
+                                <div class="detail-item">
+                                    <span>价格</span>
+                                    <strong>¥45.00</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>交易方式</span>
+                                    <strong>当面交易</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>完成时间</span>
+                                    <strong>2023-04-12</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline" onclick="viewOrderDetails(3)">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <button class="btn btn-primary" onclick="rateOrder(3)">
+                                <i class="fas fa-star"></i> 评价订单
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 已取消订单 -->
+            <div class="order-section">
+                <h3><i class="fas fa-times-circle"></i> 已取消订单</h3>
+                <div class="order-cards">
+                    <div class="order-card status-cancelled">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <strong>订单号: #20230405004</strong>
+                                <span class="order-time">取消时间: 2023-04-06 09:20</span>
+                            </div>
+                            <div class="order-status">
+                                <span class="status-badge">已取消</span>
+                            </div>
+                        </div>
+                        <div class="order-content">
+                            <div class="order-book">
+                                <div class="book-image">
+                                    <img src="https://via.placeholder.com/80x100/FFA500/FFFFFF?text=大学物理" alt="大学物理">
+                                </div>
+                                <div class="book-details">
+                                    <h4>大学物理（第五版）</h4>
+                                    <p>作者: 张三慧</p>
+                                    <p>ISBN: 9787302173144</p>
+                                </div>
+                            </div>
+                            <div class="order-partner">
+                                <div class="partner-info">
+                                    <i class="fas fa-user-circle"></i>
+                                    <div>
+                                        <strong>赵同学</strong>
+                                        <span>西溪校区 · 信誉等级: B</span>
+                                    </div>
+                                </div>
+                                <div class="cancellation-reason">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>取消原因: 买家改变主意</span>
+                                </div>
+                            </div>
+                            <div class="order-details">
+                                <div class="detail-item">
+                                    <span>价格</span>
+                                    <strong>¥38.00</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>交易方式</span>
+                                    <strong>当面交易</strong>
+                                </div>
+                                <div class="detail-item">
+                                    <span>取消时间</span>
+                                    <strong>2023-04-06</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline" onclick="viewOrderDetails(4)">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <button class="btn btn-outline" onclick="relistBook(4)">
+                                <i class="fas fa-redo"></i> 重新上架
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 订单状态说明 -->
+        <section class="order-status-info">
+            <h3><i class="fas fa-info-circle"></i> 订单状态说明</h3>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-icon status-pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="status-content">
+                        <h4>待沟通</h4>
+                        <p>订单已创建，等待买卖双方沟通确认交易细节</p>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-icon status-confirmed">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="status-content">
+                        <h4>待确认</h4>
+                        <p>双方已沟通，等待确认价格、交易方式和时间</p>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-icon status-delivery">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="status-content">
+                        <h4>待交付</h4>
+                        <p>交易已确认，等待完成书籍交付</p>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-icon status-completed">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="status-content">
+                        <h4>已完成</h4>
+                        <p>交易已完成，双方可进行评价</p>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-icon status-cancelled">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="status-content">
+                        <h4>已取消</h4>
+                        <p>订单已被取消，可查看取消原因</p>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-icon status-dispute">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="status-content">
+                        <h4>交易纠纷</h4>
+                        <p>交易出现争议，需要平台介入处理</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>星辰书链</h3>
+                        <p>浙江大学校园学术资源交易平台</p>
+                        <p>致力于构建诚信、高效、可持续的校园学术资源循环生态</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>快速链接</h3>
+                        <a href="#">关于我们</a>
+                        <a href="#">使用条款</a>
+                        <a href="#">隐私政策</a>
+                        <a href="#">帮助中心</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>联系我们</h3>
+                        <p><i class="fas fa-envelope"></i> support@qiushu.zju.edu.cn</p>
+                        <p><i class="fas fa-phone"></i> (0571) 8820-XXXX</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 浙江省杭州市西湖区余杭塘路866号</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>关注我们</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-weixin"></i></a>
+                            <a href="#"><i class="fab fa-qq"></i></a>
+                            <a href="#"><i class="fab fa-weibo"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2023 求书平台 - 浙江大学创新创业项目 | 浙ICP备XXXXXX号</p>
+                    <div class="trust-badges">
+                        <span><i class="fas fa-shield-alt"></i> 浙大实名认证</span>
+                        <span><i class="fas fa-lock"></i> 安全交易</span>
+                        <span><i class="fas fa-recycle"></i> 绿色校园</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="js/app.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/orders.js"></script>
+</body>
+</html>

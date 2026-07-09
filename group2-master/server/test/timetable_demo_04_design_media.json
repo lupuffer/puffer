@@ -1,0 +1,46 @@
+{
+  "profile": "设计与数字媒体课表",
+  "semester": "2026-2027 春夏学期",
+  "courses": [
+    {
+      "name": "视觉传达设计",
+      "day": "周一",
+      "time": "5-7节",
+      "teacher": "唐老师",
+      "weeks": "1-12周",
+      "credits": "3"
+    },
+    {
+      "name": "用户体验设计",
+      "day": "周二",
+      "time": "1-3节",
+      "teacher": "叶老师",
+      "weeks": "1-16周",
+      "credits": "3"
+    },
+    {
+      "name": "数字媒体技术",
+      "day": "周三",
+      "time": "6-8节",
+      "teacher": "韩老师",
+      "weeks": "1-16周",
+      "credits": "3"
+    },
+    {
+      "name": "摄影基础",
+      "day": "周四",
+      "time": "3-4节",
+      "teacher": "马老师",
+      "weeks": "1-10周",
+      "credits": "2"
+    },
+    {
+      "name": "网页交互原型",
+      "day": "周五",
+      "time": "1-2节",
+      "teacher": "丁老师",
+      "weeks": "5-16周",
+      "credits": "2"
+    }
+  ]
+}

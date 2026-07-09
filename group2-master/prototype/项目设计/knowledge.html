@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识遗产社区 - 星辰书链</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/knowledge.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="layout-sidebar">
+    <!-- 左侧固定导航栏 -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>星辰书链</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i><span>首页</span></a>
+            <a href="buy.html" class="nav-link"><i class="fas fa-shopping-cart"></i><span>我要买书</span></a>
+            <a href="sell.html" class="nav-link"><i class="fas fa-tag"></i><span>我要卖书</span></a>
+            <a href="knowledge.html" class="nav-link active"><i class="fas fa-graduation-cap"></i><span>知识遗产社区</span></a>
+            <a href="messages.html" class="nav-link"><i class="fas fa-comments"></i><span>消息中心</span></a>
+            <a href="profile.html" class="nav-link"><i class="fas fa-user"></i><span>个人中心</span></a>
+        </nav>
+        <div class="sidebar-user">
+            <div class="user-info">
+                <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+                <div class="user-details">
+                    <span class="user-name">请登录</span>
+                    <span class="user-badge"><i class="fas fa-check-circle"></i> 浙大认证</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <!-- 顶部固定标题栏 -->
+        <header class="content-header">
+            <div class="header-left">
+                <h1 class="page-title">知识遗产社区</h1>
+                <div class="header-search">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="搜索资料标题 / 课程名 / 标签" id="searchInput" class="header-search-input">
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="header-btn btn-notification" title="消息中心"><i class="fas fa-bell"></i><span class="notification-dot"></span></button>
+                <button class="header-btn btn-publish" onclick="openUploadModal()">
+                    <i class="fas fa-cloud-upload-alt"></i>上传资料
+                </button>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <!-- Banner - 半高版头 -->
+            <section class="community-intro">
+                <div class="intro-content">
+                    <h1><i class="fas fa-graduation-cap"></i> 知识遗产社区</h1>
+                    <p class="intro-subtitle">传承学术智慧，共享学习资源</p>
+                    <p class="intro-description">
+                        浙江大学学子分享学习笔记、课程资料、考试重点的专属社区。每一份资料都凝聚着学长学姐的学习智慧。
+                    </p>
+                    <div class="intro-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span class="stat-value">1,248</span>
+                            <span class="stat-label">份学习资料</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <span class="stat-value">3,567</span>
+                            <span class="stat-label">位贡献者</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-download"></i>
+                            <span class="stat-value">28,941</span>
+                            <span class="stat-label">次下载</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 内容区两列布局 -->
+            <div class="knowledge-content">
+                <!-- 主内容列 -->
+                <div class="main-column">
+                    <!-- Tab 分类导航 -->
+                    <div class="category-tabs">
+                        <button class="tab-item active" onclick="switchTab(this, 'public')">公共课资料（324）</button>
+                        <button class="tab-item" onclick="switchTab(this, 'major')">专业课资料（568）</button>
+                        <button class="tab-item" onclick="switchTab(this, 'exam')">考研资料（189）</button>
+                        <button class="tab-item" onclick="switchTab(this, 'notes')">课堂笔记（742）</button>
+                    </div>
+
+                    <!-- 工具条 -->
+                    <div class="content-toolbar">
+                        <span class="toolbar-title">热门资料</span>
+                        <div class="sort-options">
+                            <span class="sort-option active" onclick="switchSort(this)">最新上传</span>
+                            <span class="sort-option" onclick="switchSort(this)">最多下载</span>
+                            <span class="sort-option" onclick="switchSort(this)">最高评分</span>
+                        </div>
+                    </div>
+
+                    <!-- 资料列表 - 单列信息流 -->
+                    <div class="materials-list">
+                        <div class="material-card">
+                            <div class="material-header">
+                                <div class="material-type">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>PDF</span>
+                                </div>
+                                <div class="material-meta">
+                                    <span><i class="fas fa-download"></i> 256</span>
+                                    <span><i class="fas fa-star"></i> 4.9</span>
+                                </div>
+                            </div>
+                            <div class="material-body">
+                                <h3>数据结构与算法完整笔记</h3>
+                                <p class="material-description">
+                                    包含数据结构所有章节的详细笔记，涵盖重点概念、算法实现和例题解析，适合期末复习和考研备考使用。
+                                </p>
+                                <div class="material-tags">
+                                    <span class="tag">计算机科学</span>
+                                    <span class="tag">CS101</span>
+                                    <span class="tag">王教授</span>
+                                </div>
+                            </div>
+                            <div class="material-footer">
+                                <div class="author-info">
+                                    <div class="author-avatar">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="author-details">
+                                        <span class="author-name">张同学</span>
+                                        <span class="author-reputation">信誉等级: A+</span>
+                                    </div>
+                                </div>
+                                <div class="material-price">
+                                    <span class="price">15 积分</span>
+                                    <button class="btn btn-primary btn-download">
+                                        <i class="fas fa-download"></i> 下载
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="material-card">
+                            <div class="material-header">
+                                <div class="material-type">
+                                    <i class="fas fa-file-word"></i>
+                                    <span>Word</span>
+                                </div>
+                                <div class="material-meta">
+                                    <span><i class="fas fa-download"></i> 189</span>
+                                    <span><i class="fas fa-star"></i> 4.8</span>
+                                </div>
+                            </div>
+                            <div class="material-body">
+                                <h3>高等数学习题集（含答案）</h3>
+                                <p class="material-description">
+                                    精选高等数学各章节典型习题，附带详细答案解析，适合考前复习和日常练习使用。
+                                </p>
+                                <div class="material-tags">
+                                    <span class="tag">数学</span>
+                                    <span class="tag">MATH201</span>
+                                    <span class="tag">李教授</span>
+                                </div>
+                            </div>
+                            <div class="material-footer">
+                                <div class="author-info">
+                                    <div class="author-avatar">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="author-details">
+                                        <span class="author-name">李同学</span>
+                                        <span class="author-reputation">信誉等级: A</span>
+                                    </div>
+                                </div>
+                                <div class="material-price">
+                                    <span class="price">20 积分</span>
+                                    <button class="btn btn-primary btn-download">
+                                        <i class="fas fa-download"></i> 下载
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="material-card">
+                            <div class="material-header">
+                                <div class="material-type">
+                                    <i class="fas fa-file-image"></i>
+                                    <span>图片</span>
+                                </div>
+                                <div class="material-meta">
+                                    <span><i class="fas fa-download"></i> 142</span>
+                                    <span><i class="fas fa-star"></i> 4.7</span>
+                                </div>
+                            </div>
+                            <div class="material-body">
+                                <h3>大学物理实验报告模板</h3>
+                                <p class="material-description">
+                                    包含所有大学物理实验的标准报告模板，格式规范，内容完整，可直接参考使用。
+                                </p>
+                                <div class="material-tags">
+                                    <span class="tag">物理学</span>
+                                    <span class="tag">PHYS101</span>
+                                    <span class="tag">张教授</span>
+                                </div>
+                            </div>
+                            <div class="material-footer">
+                                <div class="author-info">
+                                    <div class="author-avatar">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="author-details">
+                                        <span class="author-name">王同学</span>
+                                        <span class="author-reputation">信誉等级: A+</span>
+                                    </div>
+                                </div>
+                                <div class="material-price">
+                                    <span class="price">免费</span>
+                                    <button class="btn btn-primary btn-download">
+                                        <i class="fas fa-download"></i> 下载
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="material-card">
+                            <div class="material-header">
+                                <div class="material-type">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>PDF</span>
+                                </div>
+                                <div class="material-meta">
+                                    <span><i class="fas fa-download"></i> 98</span>
+                                    <span><i class="fas fa-star"></i> 4.9</span>
+                                </div>
+                            </div>
+                            <div class="material-body">
+                                <h3>英语四级备考宝典</h3>
+                                <p class="material-description">
+                                    包含词汇、语法、阅读、写作各模块的备考策略和真题解析，助你一次通过四级考试。
+                                </p>
+                                <div class="material-tags">
+                                    <span class="tag">英语</span>
+                                    <span class="tag">CET-4</span>
+                                    <span class="tag">备考资料</span>
+                                </div>
+                            </div>
+                            <div class="material-footer">
+                                <div class="author-info">
+                                    <div class="author-avatar">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="author-details">
+                                        <span class="author-name">赵同学</span>
+                                        <span class="author-reputation">信誉等级: B+</span>
+                                    </div>
+                                </div>
+                                <div class="material-price">
+                                    <span class="price">10 积分</span>
+                                    <button class="btn btn-primary btn-download">
+                                        <i class="fas fa-download"></i> 下载
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="material-card">
+                            <div class="material-header">
+                                <div class="material-type">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>PDF</span>
+                                </div>
+                                <div class="material-meta">
+                                    <span><i class="fas fa-download"></i> 87</span>
+                                    <span><i class="fas fa-star"></i> 4.6</span>
+                                </div>
+                            </div>
+                            <div class="material-body">
+                                <h3>线性代数重点总结与例题</h3>
+                                <p class="material-description">
+                                    线性代数核心知识点总结，配有经典例题和详细解答，适合快速复习和查漏补缺。
+                                </p>
+                                <div class="material-tags">
+                                    <span class="tag">数学</span>
+                                    <span class="tag">线性代数</span>
+                                    <span class="tag">重点总结</span>
+                                </div>
+                            </div>
+                            <div class="material-footer">
+                                <div class="author-info">
+                                    <div class="author-avatar">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="author-details">
+                                        <span class="author-name">陈同学</span>
+                                        <span class="author-reputation">信誉等级: A</span>
+                                    </div>
+                                </div>
+                                <div class="material-price">
+                                    <span class="price">12 积分</span>
+                                    <button class="btn btn-primary btn-download">
+                                        <i class="fas fa-download"></i> 下载
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧辅助列 -->
+                <div class="sidebar-column">
+                    <!-- 本周热门 -->
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-fire"></i> 本周热门</h3>
+                        <div class="hot-list">
+                            <div class="hot-item">
+                                <span class="hot-rank top">1</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">数据结构与算法完整笔记</div>
+                                    <div class="hot-meta">256次下载</div>
+                                </div>
+                            </div>
+                            <div class="hot-item">
+                                <span class="hot-rank top">2</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">高等数学习题集（含答案）</div>
+                                    <div class="hot-meta">189次下载</div>
+                                </div>
+                            </div>
+                            <div class="hot-item">
+                                <span class="hot-rank top">3</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">大学物理实验报告模板</div>
+                                    <div class="hot-meta">142次下载</div>
+                                </div>
+                            </div>
+                            <div class="hot-item">
+                                <span class="hot-rank">4</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">英语四级备考宝典</div>
+                                    <div class="hot-meta">98次下载</div>
+                                </div>
+                            </div>
+                            <div class="hot-item">
+                                <span class="hot-rank">5</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">线性代数重点总结</div>
+                                    <div class="hot-meta">87次下载</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 最多下载 -->
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-download"></i> 最多下载</h3>
+                        <div class="hot-list">
+                            <div class="hot-item">
+                                <span class="hot-rank top">1</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">高等数学全册笔记</div>
+                                    <div class="hot-meta">1,234次下载</div>
+                                </div>
+                            </div>
+                            <div class="hot-item">
+                                <span class="hot-rank top">2</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">C++程序设计教程</div>
+                                    <div class="hot-meta">987次下载</div>
+                                </div>
+                            </div>
+                            <div class="hot-item">
+                                <span class="hot-rank top">3</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">大学英语词汇手册</div>
+                                    <div class="hot-meta">856次下载</div>
+                                </div>
+                            </div>
+                            <div class="hot-item">
+                                <span class="hot-rank">4</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">考研数学复习指南</div>
+                                    <div class="hot-meta">743次下载</div>
+                                </div>
+                            </div>
+                            <div class="hot-item">
+                                <span class="hot-rank">5</span>
+                                <div class="hot-content">
+                                    <div class="hot-title">电路原理实验指导</div>
+                                    <div class="hot-meta">621次下载</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 移动端上传按钮 -->
+        <div class="upload-fab" onclick="openUploadModal()">
+            <i class="fas fa-plus"></i>
+        </div>
+
+        <!-- 上传模态框 -->
+        <div class="modal" id="uploadModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-cloud-upload-alt"></i> 上传学习资料</h3>
+                    <button class="modal-close" onclick="closeUploadModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="upload-form" id="uploadForm">
+                        <div class="form-group">
+                            <label><i class="fas fa-heading"></i> 资料标题</label>
+                            <input type="text" placeholder="请输入资料标题" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-filter"></i> 资料分类</label>
+                            <select required>
+                                <option value="">请选择分类</option>
+                                <option value="public">公共课资料</option>
+                                <option value="major">专业课资料</option>
+                                <option value="exam">考研资料</option>
+                                <option value="notes">课堂笔记</option>
+                                <option value="other">其他资料</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-book"></i> 关联课程</label>
+                            <input type="text" placeholder="请输入课程名称或代码">
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-comment"></i> 资料描述</label>
+                            <textarea placeholder="请详细描述资料的内容、特点和适用对象..." rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-file-upload"></i> 上传文件</label>
+                            <div class="file-upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>点击或拖拽上传文件</p>
+                                <small>支持 PDF、Word、Excel、PPT、图片格式，最大50MB</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-tag"></i> 设置价格</label>
+                            <div class="price-options">
+                                <label class="price-option">
+                                    <input type="radio" name="priceType" value="free" checked>
+                                    <div class="option-content">
+                                        <i class="fas fa-gift"></i>
+                                        <span>免费分享</span>
+                                        <small>无私分享，帮助他人</small>
+                                    </div>
+                                </label>
+                                <label class="price-option">
+                                    <input type="radio" name="priceType" value="points">
+                                    <div class="option-content">
+                                        <i class="fas fa-coins"></i>
+                                        <span>积分下载</span>
+                                        <small>设置积分价格</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-tags"></i> 标签</label>
+                            <input type="text" placeholder="输入标签，用逗号分隔">
+                            <div class="tag-suggestions">
+                                <span class="tag-suggestion">计算机科学</span>
+                                <span class="tag-suggestion">数学</span>
+                                <span class="tag-suggestion">物理</span>
+                                <span class="tag-suggestion">英语</span>
+                                <span class="tag-suggestion">考研</span>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" onclick="closeUploadModal()">取消</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-upload"></i> 上传资料
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>星辰书链</h3>
+                        <p>浙江大学校园学术资源交易平台</p>
+                        <p>致力于构建诚信、高效、可持续的校园学术资源循环生态</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>快速链接</h3>
+                        <a href="#">关于我们</a>
+                        <a href="#">使用条款</a>
+                        <a href="#">隐私政策</a>
+                        <a href="#">帮助中心</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>联系我们</h3>
+                        <p><i class="fas fa-envelope"></i> support@qiushu.zju.edu.cn</p>
+                        <p><i class="fas fa-phone"></i> (0571) 8820-XXXX</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 浙江省杭州市西湖区余杭塘路866号</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>关注我们</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-weixin"></i></a>
+                            <a href="#"><i class="fab fa-qq"></i></a>
+                            <a href="#"><i class="fab fa-weibo"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2023 求书平台 - 浙江大学创新创业项目 | 浙ICP备XXXXXX号</p>
+                    <div class="trust-badges">
+                        <span><i class="fas fa-shield-alt"></i> 浙大实名认证</span>
+                        <span><i class="fas fa-lock"></i> 安全交易</span>
+                        <span><i class="fas fa-recycle"></i> 绿色校园</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                alert('搜索：' + this.value + '（原型占位）');
+            }
+        });
+
+        // Tab 切换
+        function switchTab(element, category) {
+            document.querySelectorAll('.tab-item').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            element.classList.add('active');
+            console.log('切换到分类：', category);
+        }
+
+        // 排序切换
+        function switchSort(element) {
+            document.querySelectorAll('.sort-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // 打开上传模态框
+        function openUploadModal() {
+            document.getElementById('uploadModal').classList.add('show');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+
+        // 关闭上传模态框
+        function closeUploadModal() {
+            document.getElementById('uploadModal').classList.remove('show');
+            document.body.style.overflow = ''; // 恢复背景滚动
+        }
+
+        // 表单提交
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('资料上传成功！审核通过后将上架展示。');
+            closeUploadModal();
+        });
+
+        // 点击模态框外部关闭
+        document.getElementById('uploadModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeUploadModal();
+            }
+        });
+    </script>
+    <script src="js/app.js"></script>
+</body>
+</html>

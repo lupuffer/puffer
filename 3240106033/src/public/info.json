@@ -1,0 +1,144 @@
+{
+  "name": {
+    "zh": "鲁振哲",
+    "en": "Zhenzhe Lu"
+  },
+  "status": "本科在读",
+  "school": {
+    "name": "浙江大学管理学院",
+    "url": "http://www.som.zju.edu.cn/"
+  },
+  "major": "信息管理与信息系统",
+  "hometown": "黑龙江省齐齐哈尔市龙江县",
+  "enrollment": "2024年9月",
+  "graduation": "2028年6月",
+  "contact": {
+    "email": "luzhenzhe2006@qq.com",
+    "phone": "131 9968 3838",
+    "address": "浙江省杭州市浙江大学紫金港校区"
+  },
+  "avatar": "/images/self.jpg",
+  "repository": {
+    "name": "个人代码仓库",
+    "url": "https://gitee.com/lu-zhenzhe/personal",
+    "description": "包含个人主页、简历及项目源码"
+  },
+  "education": [
+    {
+      "school": "浙江大学 (Zhejiang University)",
+      "date": "2024.09 - 至今",
+      "major": "管理学院 · 信息管理与信息系统 · 本科在读",
+      "description": "主修课程：数据结构、数据库系统、运筹学、数据分析、管理信息系统等"
+    },
+    {
+      "school": "龙江县第一中学",
+      "date": "2021.09 - 2024.06",
+      "major": "理科高中",
+      "description": "高中阶段，培养了扎实的数学和逻辑思维能力"
+    }
+  ],
+  "research": {
+    "quote": "深入学习数据分析 (Data Science) 与 运筹优化 (Operations Research) 理论，提升统计建模与算法能力，通过数据驱动方法解决复杂管理问题。",
+    "politicalEconomy": {
+      "title": "政治经济学理论研究",
+      "description": "系统学习马克思主义政治经济学基本原理，深入理解中国特色社会主义经济制度的理论基础和实践经验。",
+      "theories": [
+        {
+          "name": "辩证唯物主义",
+          "description": "掌握辩证唯物主义的基本原理，理解事物发展的内在矛盾和规律，运用辩证思维分析经济现象。"
+        },
+        {
+          "name": "历史唯物主义",
+          "description": "学习历史唯物主义的基本观点，理解生产力与生产关系的矛盾运动，认识社会发展的客观规律。"
+        },
+        {
+          "name": "剩余价值理论",
+          "description": "深入研究马克思剩余价值理论，理解资本主义生产方式的本质，分析当代资本主义经济的新特征。"
+        },
+        {
+          "name": "中国特色社会主义经济制度",
+          "description": "系统学习中国特色社会主义经济制度，理解社会主义市场经济体制的特点和优势，掌握基本经济制度、分配制度等内容。"
+        }
+      ]
+    },
+    "areas": [
+      {
+        "icon": "📊",
+        "title": "数据分析",
+        "description": "关注统计学习、机器学习在商业决策中的应用，探索数据驱动的管理优化方法。"
+      },
+      {
+        "icon": "⚙️",
+        "title": "运筹优化",
+        "description": "研究数学规划、优化算法，应用于供应链管理、资源分配等实际问题。"
+      },
+      {
+        "icon": "🏆",
+        "title": "数学建模",
+        "description": "具备扎实的数学基础，致力于跨学科的建模挑战和实际问题求解。"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": 1,
+      "name": "钱学森问题扩展求解：绕日返回轨道设计",
+      "nameEn": "Extended Tsien Trajectory: Solar-Return Orbit Design",
+      "icon": "🚀",
+      "date": "2026.06",
+      "role": "独立完成",
+      "techStack": ["Python", "NumPy", "Matplotlib", "AstroPy", "LaTeX", "遗传算法", "N体模拟"],
+      "summary": "基于钱学森《星际航行概论》框架，开发高精度N体积分器与多重打靶优化算法，实现包含月球借力与发射窗口优化的绕日返回轨道设计。",
+      "highlights": [
+        "自研 Velocity-Verlet 辛积分器，能量漂移低至 4.32×10⁻¹⁵（1年仿真）",
+        "复现钱学森拼接圆锥曲线算例，所有参数偏差 ≤ 0.1%",
+        "实现遗传算法 + 并行蒙特卡洛全局优化框架",
+        "对接 JPL Horizons 真实历表进行残差校验",
+        "生成完整学术报告（LaTeX）与轨道动画（MP4）"
+      ],
+      "repoUrl": "https://gitee.com/lu-zhenzhe/personal",
+      "docUrl": "https://gitee.com/lu-zhenzhe/personal"
+    },
+    {
+      "id": 2,
+      "name": "SeekBook 二手书与知识资产流转系统",
+      "nameEn": "SeekBook — Used Book & Knowledge Asset Circulation Platform",
+      "icon": "📚",
+      "date": "2026.05",
+      "role": "主要开发者",
+      "techStack": ["Vue 3", "Flask", "SQLAlchemy", "SQLite", "通义千问", "ECharts", "Vite"],
+      "summary": "基于 Vue 3 + Flask 的全栈Web应用，构建包含十万级虚拟书籍数据的二手书交易与知识社区平台，集成ISBN智能识别与课程表知识图谱功能。",
+      "highlights": [
+        "设计并实现 Blueprint 微服务工厂架构，单文件严格 ≤ 200行",
+        "开发 ISBN 双轨智能识别：通义千问 Qwen-VL 云端OCR + 文件名后门",
+        "构建知识星河社区模块（笔记发布、模糊搜索关联、评论互动）",
+        "实现课表 JSON 导入 → 智慧清单生成 → ECharts 知识星图可视化",
+        "线下对交交易模式：零余额系统，见面信息 SQLite 强持久化"
+      ],
+      "repoUrl": "https://gitee.com/lu-zhenzhe/personal",
+      "docUrl": "https://gitee.com/lu-zhenzhe/personal"
+    }
+  ],
+  "awards": [
+    {
+      "title": "全国大学生数学竞赛（非数学类B类）",
+      "tag": "浙江省一等奖"
+    },
+    {
+      "title": "微积分竞赛",
+      "tag": "浙江省三等奖"
+    },
+    {
+      "title": "浙江大学丹青学园团总支篮球赛",
+      "tag": "作为队员获得比赛第一名"
+    },
+    {
+      "title": "CET-4 / CET-6 英语等级测试已通过",
+      "tag": null
+    },
+    {
+      "title": "高中阶段多次获得校级三好学生",
+      "tag": null
+    }
+  ]
+}

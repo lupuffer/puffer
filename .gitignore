@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build output
+dist/
+.output/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# LaTeX auxiliary
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+
+# Python virtualenv
+venv/
+env/
+.venv/
+
+# Environment files
+.env
+.env.local
+
+# Database
+*.db
+
+# Uploads (keep directory, ignore files)
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# Package locks in subprojects (keep root if needed)
+package-lock.json
+
+# Generated resume scripts
+generate_resume_docx.cjs
