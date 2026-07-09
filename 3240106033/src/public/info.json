@@ -20,7 +20,7 @@
   "avatar": "/images/self.jpg",
   "repository": {
     "name": "个人代码仓库",
-    "url": "https://gitee.com/lu-zhenzhe/personal",
+    "url": "https://github.com/lupuffer/puffer",
     "description": "包含个人主页、简历及项目源码"
   },
   "education": [
@@ -96,8 +96,8 @@
         "对接 JPL Horizons 真实历表进行残差校验",
         "生成完整学术报告（LaTeX）与轨道动画（MP4）"
       ],
-      "repoUrl": "https://gitee.com/lu-zhenzhe/personal",
-      "docUrl": "https://gitee.com/lu-zhenzhe/personal"
+      "repoUrl": "https://github.com/lupuffer/puffer",
+      "docUrl": "https://github.com/lupuffer/puffer"
     },
     {
       "id": 2,
@@ -115,8 +115,8 @@
         "实现课表 JSON 导入 → 智慧清单生成 → ECharts 知识星图可视化",
         "线下对交交易模式：零余额系统，见面信息 SQLite 强持久化"
       ],
-      "repoUrl": "https://gitee.com/lu-zhenzhe/personal",
-      "docUrl": "https://gitee.com/lu-zhenzhe/personal"
+      "repoUrl": "https://github.com/lupuffer/puffer",
+      "docUrl": "https://github.com/lupuffer/puffer"
     }
   ],
   "awards": [

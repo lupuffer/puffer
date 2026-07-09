@@ -1,7 +1,7 @@
 # 鲁振哲 (Zhenzhe Lu) — 个人代码仓库
 
 > 📧 luzhenzhe2006@qq.com | 🏫 浙江大学管理学院 | 信息管理与信息系统  
-> 🔗 仓库地址：https://gitee.com/lu-zhenzhe/personal
+> 🔗 仓库地址：https://github.com/lupuffer/puffer
 
 ---
 
