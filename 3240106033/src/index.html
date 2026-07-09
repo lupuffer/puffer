@@ -185,6 +185,84 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes orbitSlow{from{transform:rotateX(65deg) rotateZ(-20deg) rotate(0deg)}to{transform:rotateX(65deg) rotateZ(-20deg) rotate(360deg)}}
 
+/* ===== RESUME ===== */
+.resume-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:24px}
+.print-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:var(--prussian);color:#fff;border:none;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;transition:background 0.25s,transform 0.2s}
+.print-btn:hover{background:#253C51;transform:translateY(-1px)}
+
+.resume-document{background:#fff;border:1px solid var(--parchment-deep);border-radius:10px;padding:48px 52px;max-width:1000px;box-shadow:0 4px 24px rgba(0,0,0,0.05)}
+@media(max-width:700px){.resume-document{padding:24px 20px}}
+.r-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;padding-bottom:20px;border-bottom:3px solid var(--prussian);margin-bottom:28px}
+.r-name{font-family:"Noto Serif SC",serif;font-size:2.2rem;font-weight:900;color:var(--ink);line-height:1.1}
+.r-name-en{font-size:0.95rem;color:var(--steel);font-style:italic;margin-top:4px}
+.r-contact{display:flex;flex-direction:column;gap:4px;font-size:0.82rem;color:var(--steel)}
+.r-body{display:grid;grid-template-columns:280px 1fr;gap:40px}
+@media(max-width:780px){.r-body{grid-template-columns:1fr}}
+.r-left{display:flex;flex-direction:column;gap:20px}
+.r-right{display:flex;flex-direction:column;gap:20px}
+
+.r-block{margin-bottom:4px}
+.r-block-title{font-family:"Noto Serif SC",serif;font-size:0.95rem;font-weight:800;color:var(--prussian);padding-bottom:6px;border-bottom:1.5px solid var(--prussian);margin-bottom:10px;letter-spacing:0.02em}
+
+.r-info-table{font-size:0.85rem}
+.r-info-table div{display:flex;padding:5px 0;border-bottom:1px dotted var(--parchment)}
+.r-info-table div:last-child{border-bottom:none}
+.r-info-table span:first-child{font-weight:600;color:var(--prussian);width:52px;flex-shrink:0}
+.r-info-table span:last-child{color:var(--ink)}
+
+.r-skill-group{margin-bottom:8px}
+.r-skill-group h4{font-size:0.8rem;font-weight:700;color:var(--prussian);margin-bottom:2px}
+.r-skill-group p{font-size:0.83rem;color:var(--steel)}
+
+.r-list{list-style:none;padding:0;font-size:0.85rem;line-height:2}
+.r-list li::before{content:'●';color:var(--oxide);font-size:0.55rem;margin-right:8px;position:relative;top:-2px}
+.r-list em{font-style:normal;font-weight:600;color:var(--oxide);font-size:0.78rem;margin-left:4px}
+.r-list-dense{font-size:0.83rem;line-height:1.85}
+.r-list-dense li::before{color:var(--prussian)}
+
+.r-role{font-size:0.88rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.r-role span{font-size:0.78rem;font-weight:400;background:var(--prussian);color:#fff;padding:1px 8px;border-radius:10px;margin:0 6px}
+.r-role time{font-size:0.8rem;color:var(--steel)}
+.r-desc{font-size:0.85rem;color:var(--steel);line-height:1.7}
+
+.r-edu-item{margin-bottom:14px}
+.r-edu-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;font-size:0.9rem}
+.r-edu-header time{font-size:0.8rem;color:var(--steel);font-style:italic}
+.r-edu-item p{font-size:0.85rem;color:var(--steel);margin:2px 0}
+
+.r-proj-item{margin-bottom:18px;padding-left:0}
+.r-proj-header{display:flex;gap:10px;margin-bottom:4px}
+.r-proj-icon{font-size:1.3rem;flex-shrink:0}
+.r-proj-header strong{font-size:0.92rem;color:var(--ink)}
+.r-proj-meta{display:flex;gap:10px;margin-top:2px}
+.r-proj-meta time{font-size:0.78rem;color:var(--steel)}
+.r-proj-meta span{font-size:0.75rem;background:var(--prussian);color:#fff;padding:1px 8px;border-radius:10px}
+.r-tech{font-size:0.8rem;margin:4px 0 6px}
+.r-tech span{font-family:"JetBrains Mono",monospace;font-size:0.72rem;font-weight:600;color:var(--prussian);margin-right:6px}
+.r-tech{color:var(--steel)}
+
+.r-repo{margin-top:8px;padding:10px 14px;background:var(--parchment);border-radius:6px;font-size:0.84rem;color:var(--prussian)}
+.r-repo strong{font-family:"JetBrains Mono",monospace;font-size:0.78rem}
+
+/* ===== PRINT STYLES ===== */
+@media print{
+  @page{margin:15mm 12mm;size:A4}
+  body{background:#fff!important;color:#000!important;font-size:10pt;line-height:1.5}
+  .nav,.hero,.orbital-stage,.footer,.no-print,.section:not(#resume),.reveal,.print-btn,.resume-toolbar .section-title{display:none!important}
+  #resume{display:block!important;opacity:1!important;transform:none!important;padding:0!important;margin:0!important;max-width:100%!important}
+  #resume .section-label{display:none}
+  .resume-document{border:none!important;box-shadow:none!important;padding:0!important;max-width:100%!important}
+  .r-header{border-bottom-color:#000!important}
+  .r-block-title{color:#000!important;border-bottom-color:#000!important}
+  .r-name{color:#000!important;font-size:20pt}
+  .r-info-table span:first-child,.r-skill-group h4,.r-tech span,.r-repo strong,.r-block-title,.r-list-dense li::before{color:#000!important}
+  .r-info-table span:last-child,.r-skill-group p,.r-desc,.r-tech,.r-contact,.r-edu-item p,.r-edu-header time,.r-proj-meta time{color:#333!important}
+  .r-list li::before{color:#000!important}
+  .r-list em{color:#000!important}
+  .r-role span,.r-proj-meta span{background:#000!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .r-repo{background:#f0f0f0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
   .hero{flex-direction:column;padding:100px 24px 60px;min-height:auto}
@@ -214,6 +292,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
       <li><a href="#about">关于</a></li>
       <li><a href="#research">研究</a></li>
       <li><a href="#projects">项目</a></li>
+      <li><a href="#resume">简历</a></li>
       <li><a href="#awards">获奖</a></li>
       <li><a href="#books">阅读</a></li>
     </ul>
@@ -291,6 +370,162 @@ body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-a
        style="color:var(--oxide);text-decoration:none;font-weight:600">gitee.com/lu-zhenzhe/personal</a>
   </p>
   <div id="projectList"></div>
+</section>
+
+<!-- ===== RESUME ===== -->
+<section class="section reveal" id="resume">
+  <div class="section-label no-print">06 / 个人简历</div>
+  <div class="resume-toolbar no-print">
+    <h2 class="section-title" style="margin-bottom:0">个人简历</h2>
+    <button class="print-btn" onclick="window.print()" title="打印或保存为PDF">
+      <span>🖨</span> 打印 / 导出PDF
+    </button>
+  </div>
+
+  <div class="resume-document">
+    <!-- Header -->
+    <div class="r-header">
+      <div>
+        <h1 class="r-name">鲁振哲</h1>
+        <p class="r-name-en">Zhenzhe Lu</p>
+      </div>
+      <div class="r-contact">
+        <span>📧 luzhenzhe2006@qq.com</span>
+        <span>📱 131 9968 3838</span>
+        <span>📍 浙江·杭州</span>
+        <span>🔗 gitee.com/lu-zhenzhe/personal</span>
+      </div>
+    </div>
+
+    <!-- Two-column body -->
+    <div class="r-body">
+      <!-- Left column -->
+      <div class="r-left">
+        <div class="r-block">
+          <h3 class="r-block-title">基本信息</h3>
+          <div class="r-info-table">
+            <div><span>学校</span><span>浙江大学管理学院</span></div>
+            <div><span>专业</span><span>信息管理与信息系统</span></div>
+            <div><span>学历</span><span>本科在读</span></div>
+            <div><span>入学</span><span>2024年9月</span></div>
+            <div><span>毕业</span><span>2028年6月</span></div>
+            <div><span>籍贯</span><span>黑龙江省齐齐哈尔市</span></div>
+          </div>
+        </div>
+
+        <div class="r-block">
+          <h3 class="r-block-title">技能</h3>
+          <div class="r-skill-group">
+            <h4>编程语言</h4>
+            <p>Python, SQL, JavaScript, HTML/CSS</p>
+          </div>
+          <div class="r-skill-group">
+            <h4>框架与工具</h4>
+            <p>Vue 3, Flask, Vite, Git, LaTeX</p>
+          </div>
+          <div class="r-skill-group">
+            <h4>数据分析</h4>
+            <p>NumPy, Pandas, Matplotlib</p>
+          </div>
+          <div class="r-skill-group">
+            <h4>语言能力</h4>
+            <p>CET-4 / CET-6, 普通话</p>
+          </div>
+        </div>
+
+        <div class="r-block">
+          <h3 class="r-block-title">获奖情况</h3>
+          <ul class="r-list">
+            <li>全国大学生数学竞赛（非数学类B类）<em>浙江省一等奖</em></li>
+            <li>微积分竞赛 <em>浙江省三等奖</em></li>
+            <li>浙江大学丹青学园篮球赛 <em>团体第一名</em></li>
+            <li>CET-4 / CET-6 <em>已通过</em></li>
+          </ul>
+        </div>
+
+        <div class="r-block">
+          <h3 class="r-block-title">学生工作</h3>
+          <p class="r-role">管理学院学业指导中心 <span>干事</span> <time>2024.09 - 至今</time></p>
+          <p class="r-desc">参与学业指导中心的日常运营与活动组织，协助开展学业帮扶与经验分享活动。</p>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="r-right">
+        <div class="r-block">
+          <h3 class="r-block-title">教育背景</h3>
+          <div class="r-edu-item">
+            <div class="r-edu-header">
+              <strong>浙江大学（Zhejiang University）</strong>
+              <time>2024.09 - 至今</time>
+            </div>
+            <p>管理学院 · 信息管理与信息系统 · 本科在读</p>
+            <p class="r-desc">主修：数据结构、数据库系统、运筹学、数据分析、管理信息系统等</p>
+          </div>
+          <div class="r-edu-item">
+            <div class="r-edu-header">
+              <strong>龙江县第一中学</strong>
+              <time>2021.09 - 2024.06</time>
+            </div>
+            <p>理科高中 · 培养了扎实的数学和逻辑思维能力</p>
+          </div>
+        </div>
+
+        <div class="r-block">
+          <h3 class="r-block-title">项目经验</h3>
+
+          <div class="r-proj-item">
+            <div class="r-proj-header">
+              <span class="r-proj-icon">🚀</span>
+              <div>
+                <strong>钱学森问题扩展求解：绕日返回轨道设计</strong>
+                <div class="r-proj-meta"><time>2026.06</time><span>独立完成</span></div>
+              </div>
+            </div>
+            <p class="r-desc">基于钱学森《星际航行概论》框架，开发高精度N体积分器与多重打靶优化算法，实现包含月球借力与发射窗口优化的绕日返回轨道设计。</p>
+            <p class="r-tech"><span>技术栈</span> Python, NumPy, Matplotlib, AstroPy, LaTeX, 遗传算法, N体模拟</p>
+            <ul class="r-list r-list-dense">
+              <li>自研 Velocity-Verlet 辛积分器，能量漂移低至 4.32×10⁻¹⁵</li>
+              <li>复现钱学森拼接圆锥曲线算例，参数偏差 ≤ 0.1%</li>
+              <li>遗传算法 + 并行蒙特卡洛全局优化，对接JPL Horizons历表校验</li>
+            </ul>
+          </div>
+
+          <div class="r-proj-item">
+            <div class="r-proj-header">
+              <span class="r-proj-icon">📚</span>
+              <div>
+                <strong>SeekBook 二手书与知识资产流转系统</strong>
+                <div class="r-proj-meta"><time>2026.05</time><span>主要开发者</span></div>
+              </div>
+            </div>
+            <p class="r-desc">Vue 3 + Flask 全栈Web应用，十万级虚拟书籍数据的二手书交易与知识社区平台。</p>
+            <p class="r-tech"><span>技术栈</span> Vue 3, Flask, SQLAlchemy, SQLite, 通义千问 Qwen-VL, ECharts, Vite</p>
+            <ul class="r-list r-list-dense">
+              <li>Blueprint微服务工厂架构，单文件严格 ≤ 200行</li>
+              <li>ISBN双轨识别：通义千问云端OCR + 文件名后门</li>
+              <li>知识星河社区、课表知识图谱、零余额线下对交系统</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="r-block">
+          <h3 class="r-block-title">研究方向</h3>
+          <ul class="r-list">
+            <li><strong>数据分析</strong> — 统计学习、机器学习在商业决策中的应用</li>
+            <li><strong>运筹优化</strong> — 数学规划、优化算法，供应链与资源分配</li>
+            <li><strong>数学建模</strong> — 跨学科建模挑战与实际问题求解</li>
+          </ul>
+        </div>
+
+        <div class="r-block">
+          <h3 class="r-block-title">自我评价</h3>
+          <p class="r-desc">本科在读，主修信息管理与信息系统。关注数据分析、运筹优化与数学建模方向，具备扎实的数学基础。熟悉Python科学计算与Vue全栈开发，具备独立完成复杂项目的能力。善于沟通协作，乐于探索新技术，致力于将数据驱动方法应用于实际管理问题。</p>
+          <p class="r-repo">📂 所有项目源码托管于 <strong>https://gitee.com/lu-zhenzhe/personal</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ===== AWARDS ===== -->
