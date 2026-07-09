@@ -1,0 +1,46 @@
+{
+  "profile": "经管类通识与专业基础",
+  "semester": "2026-2027 秋冬学期",
+  "courses": [
+    {
+      "name": "微观经济学",
+      "day": "周一",
+      "time": "1-2节",
+      "teacher": "王教授",
+      "weeks": "1-16周",
+      "credits": "3"
+    },
+    {
+      "name": "管理学原理",
+      "day": "周二",
+      "time": "3-4节",
+      "teacher": "沈老师",
+      "weeks": "1-16周",
+      "credits": "3"
+    },
+    {
+      "name": "会计学基础",
+      "day": "周三",
+      "time": "5-6节",
+      "teacher": "徐老师",
+      "weeks": "1-16周",
+      "credits": "3"
+    },
+    {
+      "name": "大学英语",
+      "day": "周四",
+      "time": "1-2节",
+      "teacher": "许老师",
+      "weeks": "1-16周",
+      "credits": "2"
+    },
+    {
+      "name": "统计学",
+      "day": "周五",
+      "time": "3-4节",
+      "teacher": "高老师",
+      "weeks": "1-16周",
+      "credits": "3"
+    }
+  ]
+}

@@ -1,0 +1,621 @@
+/* 管理员后台样式 */
+
+/* 管理员徽章 */
+.admin-badge {
+    background-color: #7c3aed !important;
+    color: white !important;
+}
+
+
+
+/* 管理员头部 */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #1f2937, #374151);
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.admin-avatar {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+}
+
+.admin-details h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-details .subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 16px;
+}
+
+.admin-stats {
+    display: flex;
+    gap: 30px;
+}
+
+.admin-stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-stat i {
+    font-size: 24px;
+    color: var(--accent-orange);
+}
+
+.admin-stat strong {
+    font-size: 20px;
+    font-weight: 700;
+    display: block;
+}
+
+.admin-stat span {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* 控制面板 */
+.control-panel {
+    margin-bottom: 40px;
+}
+
+.panel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+.panel-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.panel-card.wide-card {
+    grid-column: span 2;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.panel-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.badge-danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-info {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.badge-success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.panel-content {
+    padding: 20px;
+}
+
+/* 待处理列表 */
+.pending-list, .report-list, .dispute-list, .queue-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.pending-item, .report-item, .dispute-item, .queue-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--gray-50);
+    border-radius: 8px;
+    border: 1px solid var(--gray-200);
+}
+
+.pending-info, .report-info, .dispute-info, .queue-info {
+    flex: 1;
+}
+
+.pending-info strong, .report-info strong, .dispute-info strong, .queue-info strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.pending-meta, .report-meta, .dispute-meta, .queue-meta {
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+.pending-actions, .report-actions, .dispute-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-success {
+    background-color: var(--secondary-green);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #0da271;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+}
+
+.btn-block {
+    width: 100%;
+    justify-content: center;
+}
+
+/* 用户统计 */
+.user-stats, .data-stats, .ai-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.user-stat, .data-stat, .ai-stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background-color: var(--gray-50);
+    border-radius: 8px;
+}
+
+.user-stat i, .data-stat i, .ai-stat i {
+    font-size: 20px;
+    color: var(--primary-blue);
+}
+
+.user-stat div, .data-stat div, .ai-stat div {
+    flex: 1;
+}
+
+.user-stat strong, .data-stat strong, .ai-stat strong {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.user-stat span, .data-stat span, .ai-stat span {
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+.user-search {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.user-search .search-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--gray-300);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* AI监控 */
+.ai-monitor {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ai-controls {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* 系统监控 */
+.system-monitor {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.system-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.metric-label {
+    font-size: 14px;
+    color: var(--gray-600);
+}
+
+.metric-bar {
+    height: 8px;
+    background-color: var(--gray-200);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.metric-fill {
+    height: 100%;
+    background-color: var(--primary-blue);
+    border-radius: 4px;
+}
+
+.metric-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-align: right;
+}
+
+.system-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+/* 支持队列 */
+.support-queue {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.queue-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--gray-50);
+    border-radius: 8px;
+    border: 1px solid var(--gray-200);
+}
+
+/* 管理员协作 */
+.admin-collaboration {
+    margin-top: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--light-blue), #e0f2fe);
+    border-radius: 12px;
+}
+
+.section-header {
+    margin-bottom: 24px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-header p {
+    color: var(--gray-600);
+}
+
+.collaboration-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.collab-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+}
+
+.collab-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 在线管理员列表 */
+.online-admins {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.admin-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background-color: var(--gray-50);
+    border-radius: 8px;
+}
+
+.admin-avatar-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.admin-details-sm {
+    flex: 1;
+}
+
+.admin-details-sm strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.admin-details-sm span {
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+.admin-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status-online {
+    background-color: var(--secondary-green);
+}
+
+.status-busy {
+    background-color: var(--accent-orange);
+}
+
+.status-away {
+    background-color: var(--gray-400);
+}
+
+/* 任务分配 */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--gray-50);
+    border-radius: 8px;
+    border-left: 4px solid var(--gray-300);
+}
+
+.task-item.high {
+    border-left-color: #ef4444;
+}
+
+.task-item.medium {
+    border-left-color: var(--accent-orange);
+}
+
+.task-item.low {
+    border-left-color: var(--secondary-green);
+}
+
+.task-info {
+    flex: 1;
+}
+
+.task-info strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.task-info span {
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+.task-assignee {
+    font-size: 12px;
+    color: var(--gray-600);
+    padding: 4px 8px;
+    background-color: var(--light-blue);
+    border-radius: 12px;
+}
+
+/* 消息中心 */
+.message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.message-item {
+    padding: 12px;
+    background-color: var(--gray-50);
+    border-radius: 8px;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.message-sender {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+
+.message-time {
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+.message-content {
+    font-size: 14px;
+    color: var(--gray-700);
+    line-height: 1.5;
+}
+
+.message-input-area {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.message-input-area input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--gray-300);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .panel-card.wide-card {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .admin-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .admin-stats {
+        justify-content: center;
+    }
+    
+    .admin-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .panel-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .user-stats, .data-stats, .ai-stats, .system-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .collaboration-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pending-item, .report-item, .dispute-item, .queue-item {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+    
+    .pending-actions, .report-actions, .dispute-actions {
+        width: 100%;
+        justify-content: center;
+    }
+}

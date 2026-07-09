@@ -2,7 +2,6 @@
 node_modules/
 __pycache__/
 *.pyc
-*.pyo
 
 # Build output
 dist/
@@ -11,6 +10,7 @@ dist/
 # IDE
 .vscode/
 .idea/
+.claude/
 
 # OS
 .DS_Store
@@ -26,51 +26,25 @@ Thumbs.db
 *.run.xml
 *.synctex.gz
 
-# Python virtualenv
+# Python
 venv/
 env/
 .venv/
 
-# Environment files
+# Env
 .env
 .env.local
 
 # Database
 *.db
 
-# Uploads (keep directory, ignore files)
+# Uploads
 server/uploads/*
 !server/uploads/.gitkeep
 
-# Logs
-*.log
-npm-debug.log*
-
-# Package locks in subprojects
+# Package locks
 package-lock.json
 
-# Claude internal
-.claude/
-
-# Resume generation temporary files
-generate_resume_docx.cjs
-check_*.txt
-check_*.py
-template_xml_snippet*.txt
-generate_resume.py
-generate_table_resume.py
-generate_resume_docx.js
-
-# Old resume versions
-resume_*.docx
-简历模板*.docx
-简历表格*.docx
-鲁振哲_个人简历*.docx
-鲁振哲_表格简历*.docx
-!鲁振哲_个人简历_优化版.docx
-
-# Debug / audit files
-全界面文字功能审计报告.md
-终极验收报告.md
-v1.md
-AI-Agent.md
+# Temp
+*.bak
+*.tmp

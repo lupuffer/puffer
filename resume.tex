@@ -1,0 +1,209 @@
+% ===== 个人简历 · 鲁振哲 =====
+% 编译: xelatex resume.tex
+\documentclass[UTF8,11pt,a4paper]{ctexart}
+
+% ----- Packages -----
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=1.8cm,bottom=1.8cm}
+
+\usepackage{xcolor}
+\definecolor{prussian}{HTML}{2E4A62}
+\definecolor{oxide}{HTML}{C44536}
+\definecolor{steel}{HTML}{5A7D9A}
+\definecolor{ink}{HTML}{1C2838}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=prussian,
+  urlcolor=oxide,
+  pdftitle={鲁振哲 - 个人简历},
+  pdfauthor={鲁振哲}
+}
+
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=18pt,itemsep=2pt}
+\setlist[itemize]{label=\textcolor{oxide}{\small\textbullet}}
+
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{parskip}
+\setlength{\parskip}{4pt}
+
+% ----- Custom Commands -----
+\newcommand{\sectionline}[1]{%
+  \par\vspace{10pt}
+  \noindent{\color{prussian}\large\heiti #1}
+  \par\vspace{2pt}\noindent{\color{prussian}\rule{\textwidth}{1.5pt}}
+  \vspace{6pt}
+}
+
+\newcommand{\cvdate}[1]{{\color{steel}\footnotesize\kaishu #1}}
+\newcommand{\cvtag}[1]{%
+  {\sffamily\fontsize{7.5}{9}\selectfont\bfseries%
+   \textcolor{white}{\colorbox{prussian}{\rule{0pt}{8pt}\hspace{3pt}#1\hspace{3pt}}}}%
+}
+\newcommand{\cvmono}[1]{{\color{steel}\ttfamily\fontsize{8.2}{10}\selectfont #1}}
+
+\begin{document}
+\thispagestyle{empty}
+
+% ===== HEADER =====
+\begin{minipage}[t]{0.62\textwidth}
+  {\Huge\heiti 鲁振哲}\\[2pt]
+  {\large\color{steel}\kaishu Zhenzhe Lu}\\[8pt]
+  \small
+  \color{prussian}浙江大学管理学院 \quad
+  \color{steel}信息管理与信息系统\\[2pt]
+  \color{steel}本科在读 $\cdot$ 2024.09 --- 2028.06
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.35\textwidth}
+  \raggedleft\small
+  \href{mailto:luzhenzhe2006@qq.com}{luzhenzhe2006@qq.com}\\[3pt]
+  131 9968 3838\\[3pt]
+  浙江 $\cdot$ 杭州 $\cdot$ 浙大紫金港\\[3pt]
+  \href{https://github.com/lupuffer/puffer}{\ttfamily\fontsize{8.5}{10}\selectfont github.com/lupuffer/puffer}
+\end{minipage}
+
+\vspace{6pt}
+\par\noindent{\color{prussian}\rule{\textwidth}{2.5pt}}
+
+% ===== EDUCATION =====
+\sectionline{教育背景}
+
+\noindent
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+  \textbf{浙江大学（Zhejiang University）} & \cvdate{2024.09 -- 至今} \\
+  \multicolumn{2}{@{}l@{}}{管理学院 \textbar\ 信息管理与信息系统 \textbar\ 本科在读} \\
+  \multicolumn{2}{@{}p{\textwidth}@{}}{\footnotesize\color{steel}主修：数据结构、数据库系统、运筹学、数据分析、管理信息系统、会计学、经济学}
+\end{tabularx}
+
+\vspace{6pt}
+\noindent
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+  \textbf{龙江县第一中学} & \cvdate{2021.09 -- 2024.06} \\
+  \multicolumn{2}{@{}l@{}}{\footnotesize\color{steel}理科高中，培养了扎实的数学和逻辑思维能力}
+\end{tabularx}
+
+% ===== PROJECTS =====
+\sectionline{项目经验}
+
+% --- Project 1 ---
+\noindent
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+  {\large\textbf{钱学森问题扩展求解：绕日返回轨道设计}} & \cvdate{2026.06} \\
+  \multicolumn{2}{@{}l@{}}{%
+    \cvtag{独立完成}\hspace{6pt}%
+    \cvmono{Python | NumPy | Matplotlib | AstroPy | LaTeX | GA | N体模拟}%
+  }
+\end{tabularx}
+
+\vspace{2pt}
+\noindent\footnotesize
+基于钱学森《星际航行概论》框架，开发高精度N体积分器与多重打靶优化算法，实现包含月球借力与发射窗口优化的绕日返回轨道设计。
+
+\begin{itemize}
+  \item 自研 Velocity-Verlet 辛积分器，能量漂移低至 $4.32 \times 10^{-15}$（1年仿真）
+  \item 复现钱学森拼接圆锥曲线算例，所有参数偏差 $\leq 0.1\%$
+  \item 遗传算法 + 并行蒙特卡洛全局优化框架，对接 JPL Horizons 真实历表残差校验
+\end{itemize}
+
+% --- Project 2 ---
+\noindent
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+  {\large\textbf{SeekBook 二手书与知识资产流转系统}} & \cvdate{2026.05} \\
+  \multicolumn{2}{@{}l@{}}{%
+    \cvtag{主要开发者}\hspace{6pt}%
+    \cvmono{Vue 3 | Flask | SQLAlchemy | SQLite | Qwen-VL | ECharts | Vite}%
+  }
+\end{tabularx}
+
+\vspace{2pt}
+\noindent\footnotesize
+Vue 3 + Flask 全栈Web应用，十万级虚拟书籍数据支撑的二手书交易与知识社区平台。
+
+\begin{itemize}
+  \item 设计并实现 Blueprint 微服务工厂架构，单文件严格 $\leq$ 200行
+  \item 开发 ISBN 双轨智能识别：通义千问 Qwen-VL 云端OCR + 文件名后门
+  \item 构建知识星河社区模块（笔记发布、模糊搜索关联、评论互动）
+  \item 实现课表 JSON 导入 $\rightarrow$ 智慧清单生成 $\rightarrow$ ECharts 知识星图可视化
+  \item 线下对交交易模式：零余额系统，见面信息 SQLite 强持久化存储
+\end{itemize}
+
+% ===== RESEARCH =====
+\sectionline{研究方向}
+
+\noindent
+\begin{minipage}[t]{0.32\textwidth}
+  \centering\small
+  \textbf{数据分析}\\[2pt]
+  {\footnotesize\color{steel}统计学习、机器学习在\\商业决策中的应用}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.32\textwidth}
+  \centering\small
+  \textbf{运筹优化}\\[2pt]
+  {\footnotesize\color{steel}数学规划、优化算法\\供应链与资源分配}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.32\textwidth}
+  \centering\small
+  \textbf{数学建模}\\[2pt]
+  {\footnotesize\color{steel}跨学科建模挑战\\实际问题求解}
+\end{minipage}
+
+% ===== SKILLS =====
+\sectionline{技能}
+
+\noindent
+\begin{tabularx}{\textwidth}{@{}p{2.8cm}X@{}}
+  \textbf{编程语言} & \cvmono{Python | SQL | JavaScript | HTML/CSS} \\[4pt]
+  \textbf{框架与工具} & \cvmono{Vue 3 | Flask | Vite | Git | LaTeX} \\[4pt]
+  \textbf{数据分析} & \cvmono{NumPy | Pandas | Matplotlib} \\[4pt]
+  \textbf{语言能力} & \cvmono{CET-4 / CET-6 | 普通话}
+\end{tabularx}
+
+% ===== AWARDS =====
+\sectionline{获奖情况}
+
+\begin{itemize}
+  \item 全国大学生数学竞赛（非数学类B类）\hspace{6pt}\cvtag{浙江省一等奖}
+  \item 微积分竞赛\hspace{6pt}\cvtag{浙江省三等奖}
+  \item 浙江大学丹青学园团总支篮球赛\hspace{6pt}\cvtag{团体第一名}
+  \item CET-4 / CET-6 英语等级测试\hspace{6pt}\cvtag{已通过}
+\end{itemize}
+
+% ===== STUDENT WORK =====
+\sectionline{学生工作}
+
+\noindent
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+  \textbf{管理学院学业指导中心 \textbar\ 干事} & \cvdate{2024.09 -- 至今}
+\end{tabularx}
+
+\vspace{2pt}
+\noindent\footnotesize\color{steel}
+参与管理学院学业指导中心的日常运营与活动组织工作，协助开展学业帮扶、经验分享等活动。
+
+% ===== SELF-EVALUATION =====
+\sectionline{自我评价}
+
+\noindent\small
+本科在读，主修信息管理与信息系统专业。关注数据分析、运筹优化与数学建模方向，具备扎实的数学基础和逻辑思维能力。熟悉 Python 科学计算与 Vue 全栈开发，具备独立完成复杂项目的能力。善于沟通协作，乐于探索新技术，致力于将数据驱动方法应用于实际管理问题。
+
+\vspace{6pt}
+\begin{center}
+  \small\color{prussian}
+  所有项目源码托管于\ \href{https://github.com/lupuffer/puffer}{\textbf{\ttfamily github.com/lupuffer/puffer}}
+\end{center}
+
+% ===== FOOTER =====
+\vspace{8pt}
+\par\noindent{\color{prussian}\rule{\textwidth}{1pt}}
+\vspace{4pt}
+\begin{center}
+  {\footnotesize\color{steel}鲁振哲 \textbar\ Zhenzhe Lu \textbar\ 浙江大学管理学院 \textbar\ \today}
+\end{center}
+
+\end{document}

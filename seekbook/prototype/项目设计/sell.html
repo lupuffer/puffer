@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我要卖书 - 星辰书链</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sell.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 页面主容器 */
+        .sell-publish-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ========== 顶部ISBN快速识别区 - 超紧凑工具条 ========== */
+        .isbn-quick-section {
+            background: white;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--gray-200);
+        }
+
+        .isbn-quick-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .isbn-quick-header i {
+            color: var(--primary-blue);
+            font-size: 14px;
+        }
+
+        .isbn-quick-header .hint {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--gray-400);
+            margin-left: 6px;
+        }
+
+        .isbn-input-group {
+            display: flex;
+            width: 100%;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .isbn-input {
+            width: 300px; /* 变窄，像蓝色部分这样的宽度 */
+            height: 42px;
+            padding: 10px 12px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .isbn-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 2px rgba(26, 86, 219, 0.08);
+        }
+
+        .isbn-btn-scan {
+            margin-left: auto; /* 将按钮推到最右侧，与下方对齐 */
+        }
+
+        .isbn-btn {
+            height: 42px;
+            padding: 0 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .isbn-btn-scan {
+            background: white;
+            color: var(--gray-700);
+            border: 1.5px solid var(--gray-300);
+        }
+
+        .isbn-btn-scan:hover {
+            background: var(--gray-50);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .isbn-btn-recognize {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .isbn-btn-recognize:hover {
+            background: #1e40af;
+        }
+
+        /* 历史记录按钮 - 更轻量 */
+        .history-upload-btn {
+            margin-top: 8px;
+            padding: 6px 0;
+            font-size: 12px;
+            color: var(--gray-400);
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .history-upload-btn:hover {
+            color: var(--primary-blue);
+        }
+
+        .history-upload-btn i {
+            font-size: 11px;
+        }
+
+        /* ========== 主内容区 - 左右布局 ========== */
+        .sell-main-layout {
+            display: grid;
+            grid-template-columns: 1fr 260px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        /* ========== 左侧主表单区 ========== */
+        .sell-form-wrapper {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+
+        .form-section {
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-title i {
+            color: var(--primary-blue);
+            font-size: 14px;
+        }
+
+        .section-title .badge {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--secondary-green);
+            background: var(--light-green);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        /* 紧凑表单行 */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .mt-12 {
+            margin-top: 12px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray-700);
+            margin-bottom: 6px;
+        }
+
+        .form-label .required {
+            color: #ef4444;
+            margin-left: 2px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1);
+        }
+
+        .form-textarea {
+            height: 80px;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        /* 单选按钮组 */
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--gray-50);
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .radio-option:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .radio-option input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary-blue);
+        }
+
+        .radio-option:has(input:checked) {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        /* 校区选择 */
+        .campus-group {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .campus-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 10px 8px;
+            background: var(--gray-50);
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .campus-option:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .campus-option input {
+            display: none;
+        }
+
+        .campus-option:has(input:checked) {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        /* 图片上传 */
+        .upload-area {
+            border: 2px dashed var(--gray-300);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--gray-50);
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .upload-area i {
+            font-size: 36px;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+        }
+
+        .upload-area p {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 4px;
+        }
+
+        .upload-area small {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .image-preview-list {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .preview-item {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-remove {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 20px;
+            height: 20px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 标签输入 */
+        .tag-input-hint {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 6px;
+        }
+
+        /* 表单操作按钮 */
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            padding: 20px;
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .form-actions .btn {
+            flex: 1;
+            padding: 12px 24px;
+            font-size: 14px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+        }
+
+        .btn-outline:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-400);
+        }
+
+        /* ========== 右侧回收通道 - 小卡片 ========== */
+        .recycle-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .recycle-card-small {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+
+        .recycle-card-small .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 18px;
+        }
+
+        .recycle-card-small h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+
+        .recycle-card-small p {
+            font-size: 12px;
+            color: var(--gray-500);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .recycle-card-small .btn-sm {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+
+        /* 提示信息 */
+        .info-tip-small {
+            background: var(--light-blue);
+            border-left: 3px solid var(--primary-blue);
+            padding: 10px 12px;
+            border-radius: 0 8px 8px 0;
+            font-size: 12px;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-tip-small i {
+            color: var(--accent-orange);
+            font-size: 14px;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 1024px) {
+            .sell-main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .recycle-sidebar {
+                flex-direction: row;
+            }
+
+            .recycle-card-small {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .campus-group {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .recycle-sidebar {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body class="layout-sidebar">
+    <!-- 左侧固定导航栏 -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>星辰书链</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i><span>首页</span></a>
+            <a href="buy.html" class="nav-link"><i class="fas fa-shopping-cart"></i><span>我要买书</span></a>
+            <a href="sell.html" class="nav-link active"><i class="fas fa-tag"></i><span>我要卖书</span></a>
+            <a href="knowledge.html" class="nav-link"><i class="fas fa-graduation-cap"></i><span>知识遗产社区</span></a>
+            <a href="messages.html" class="nav-link"><i class="fas fa-comments"></i><span>消息中心</span></a>
+            <a href="profile.html" class="nav-link"><i class="fas fa-user"></i><span>个人中心</span></a>
+        </nav>
+        <div class="sidebar-user">
+            <div class="user-info">
+                <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+                <div class="user-details">
+                    <span class="user-name">请登录</span>
+                    <span class="user-badge"><i class="fas fa-check-circle"></i> 浙大认证</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <!-- 顶部固定标题栏 -->
+        <header class="content-header">
+            <div class="header-left">
+                <h1 class="page-title">我要卖书</h1>
+                <!-- 标题栏搜索框 -->
+                <div class="header-search">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="输入书籍名称检索..." class="header-search-input">
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- 消息铃铛 -->
+                <button class="header-btn btn-notification" title="消息中心">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="sell-publish-container">
+                
+                <!-- ========== 主内容区：左侧表单 + 右侧回收 ========== -->
+                <div class="sell-main-layout">
+                    
+                    <!-- 左侧主表单 -->
+                    <div class="sell-form-wrapper">
+                        <!-- ========== 顶部ISBN快速识别区 ========== -->
+                        <div class="isbn-quick-section">
+                            <div class="isbn-quick-header">
+                                <i class="fas fa-barcode"></i>
+                                <span>扫码/ISBN快速识别</span>
+                                <span class="hint">输入ISBN后将自动填充书名、作者、出版社等信息</span>
+                            </div>
+                            <div class="isbn-input-group">
+                                <input type="text" class="isbn-input" id="bookIsbn" placeholder="请输入ISBN号" maxlength="13">
+                                <button class="isbn-btn isbn-btn-scan" onclick="scanISBN()">
+                                    <i class="fas fa-camera"></i>
+                                    扫码
+                                </button>
+                                <button class="isbn-btn isbn-btn-recognize" onclick="recognizeISBN()">
+                                    识别
+                                </button>
+                            </div>
+                            <button class="history-upload-btn" onclick="showHistory()">
+                                <i class="fas fa-history"></i>
+                                从购买历史一键上架
+                            </button>
+                        </div>
+                        
+                        <form id="sellForm">
+                            
+                            <!-- 书籍基本信息 -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <i class="fas fa-book"></i>
+                                    书籍基本信息
+                                    <span class="badge" id="autoFillBadge" style="display: none;">已自动识别</span>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">书名 <span class="required">*</span></label>
+                                        <input type="text" class="form-input" id="bookTitle" placeholder="请输入书名" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">作者 <span class="required">*</span></label>
+                                        <input type="text" class="form-input" id="bookAuthor" placeholder="请输入作者" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">出版社</label>
+                                        <input type="text" class="form-input" id="bookPublisher" placeholder="选填">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">版次</label>
+                                        <input type="text" class="form-input" id="bookEdition" placeholder="选填，如第1版">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 书籍状况 -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <i class="fas fa-star"></i>
+                                    书籍状况
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">新旧程度 <span class="required">*</span></label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" name="condition" value="new">
+                                            <span>全新</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="condition" value="like-new" checked>
+                                            <span>九成新</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="condition" value="good">
+                                            <span>八成新</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="condition" value="fair">
+                                            <span>七成新</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-12">
+                                    <label class="form-label">笔记情况</label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" name="hasNotes" value="no" checked>
+                                            <span>无笔记</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="hasNotes" value="yes">
+                                            <span>有笔记</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 交易信息 -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <i class="fas fa-exchange-alt"></i>
+                                    交易信息
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">售价（元） <span class="required">*</span></label>
+                                        <input type="number" class="form-input" id="bookPrice" placeholder="输入售价" min="0" step="0.01" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">原价（元）</label>
+                                        <input type="number" class="form-input" id="originalPrice" placeholder="选填" min="0" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">交易方式 <span class="required">*</span></label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" name="tradeMethod" value="face" checked>
+                                            <span>当面交易</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="tradeMethod" value="mail">
+                                            <span>邮寄</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="tradeMethod" value="both">
+                                            <span>皆可</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-12">
+                                    <label class="form-label">所在校区 <span class="required">*</span></label>
+                                    <div class="campus-group">
+                                        <label class="campus-option">
+                                            <input type="radio" name="campus" value="zjg" checked>
+                                            <i class="fas fa-university"></i>
+                                            <span>紫金港</span>
+                                        </label>
+                                        <label class="campus-option">
+                                            <input type="radio" name="campus" value="yq">
+                                            <i class="fas fa-university"></i>
+                                            <span>玉泉</span>
+                                        </label>
+                                        <label class="campus-option">
+                                            <input type="radio" name="campus" value="xh">
+                                            <i class="fas fa-university"></i>
+                                            <span>西溪</span>
+                                        </label>
+                                        <label class="campus-option">
+                                            <input type="radio" name="campus" value="hj">
+                                            <i class="fas fa-university"></i>
+                                            <span>华家池</span>
+                                        </label>
+                                        <label class="campus-option">
+                                            <input type="radio" name="campus" value="other">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>其他</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-12">
+                                    <label class="form-label">联系方式</label>
+                                    <input type="text" class="form-input" id="contactInfo" placeholder="微信号/手机号（选填）">
+                                </div>
+                            </div>
+
+                            <!-- 书籍图片 -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <i class="fas fa-images"></i>
+                                    书籍图片 <span class="required">*</span>
+                                </div>
+                                <div class="upload-area" onclick="document.getElementById('photoUpload').click()">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>点击或拖拽上传图片</p>
+                                    <small>支持 JPG、PNG，最多5张</small>
+                                </div>
+                                <input type="file" id="photoUpload" accept="image/*" multiple style="display: none;" onchange="handleImageUpload(event)">
+                                <div class="image-preview-list" id="imagePreviewList"></div>
+                            </div>
+
+                            <!-- 课程标签 -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <i class="fas fa-tags"></i>
+                                    课程标签
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-input" id="courseTags" placeholder="关联课程，如高等数学、数据结构，用逗号分隔">
+                                    <p class="tag-input-hint">填写课程标签可帮助更多同学发现您的书籍</p>
+                                </div>
+                            </div>
+
+                            <!-- 补充说明 -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <i class="fas fa-comment"></i>
+                                    补充说明
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-textarea" id="bookDescription" placeholder="书籍保存状况、使用感受等补充信息（选填）"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- 表单操作 -->
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="saveDraft()">
+                                    <i class="fas fa-save"></i>
+                                    保存草稿
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i>
+                                    提交发布
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- 右侧回收通道 - 小卡片 -->
+                    <aside class="recycle-sidebar">
+                        
+                        <!-- 上门回收 -->
+                        <div class="recycle-card-small">
+                            <div class="icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h4>上门回收</h4>
+                            <p>专业团队上门取书<br>足不出户轻松卖书</p>
+                            <button class="btn btn-outline btn-sm" onclick="applyDoorRecycle()">
+                                立即申请
+                            </button>
+                        </div>
+
+                        <!-- 定点回收 -->
+                        <div class="recycle-card-small">
+                            <div class="icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h4>定点回收</h4>
+                            <p>送至附近回收点<br>快速便捷现场结算</p>
+                            <button class="btn btn-outline btn-sm" onclick="showRecyclePoints()">
+                                查看网点
+                            </button>
+                        </div>
+
+                        <!-- 提示信息 -->
+                        <div class="info-tip-small">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>书籍回收适合大批量处理，价格透明即时到账</span>
+                        </div>
+
+                    </aside>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>星辰书链</h3>
+                        <p>浙江大学校园学术资源交易平台</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>快速链接</h3>
+                        <a href="#">关于我们</a>
+                        <a href="#">使用条款</a>
+                        <a href="#">隐私政策</a>
+                        <a href="#">帮助中心</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>联系我们</h3>
+                        <p><i class="fas fa-envelope"></i> support@qiushu.zju.edu.cn</p>
+                        <p><i class="fas fa-phone"></i> (0571) 8820-XXXX</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>关注我们</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-weixin"></i></a>
+                            <a href="#"><i class="fab fa-qq"></i></a>
+                            <a href="#"><i class="fab fa-weibo"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-footer">
+                    <p>© 2023 求书平台 - 浙江大学创新创业项目</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // 图片上传处理
+        let uploadedImages = [];
+        
+        function handleImageUpload(event) {
+            const files = event.target.files;
+            if (!files.length) return;
+            
+            if (uploadedImages.length + files.length > 5) {
+                alert('最多只能上传5张图片');
+                return;
+            }
+            
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith('image/')) {
+                    alert(`${file.name} 不是图片格式`);
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    uploadedImages.push({
+                        id: Date.now() + Math.random(),
+                        data: e.target.result
+                    });
+                    updateImagePreview();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function updateImagePreview() {
+            const container = document.getElementById('imagePreviewList');
+            container.innerHTML = '';
+            
+            uploadedImages.forEach((img, index) => {
+                const item = document.createElement('div');
+                item.className = 'preview-item';
+                item.innerHTML = `
+                    <img src="${img.data}" alt="图片${index + 1}">
+                    <button type="button" class="preview-remove" onclick="removeImage(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                container.appendChild(item);
+            });
+        }
+        
+        function removeImage(index) {
+            uploadedImages.splice(index, 1);
+            updateImagePreview();
+        }
+        
+        // ISBN相关功能
+        function scanISBN() {
+            alert('扫码功能需要摄像头权限，请在移动设备上使用');
+            // 模拟数据填充
+            document.getElementById('bookIsbn').value = '9787111636623';
+            fillBookInfo({
+                title: '深入理解计算机系统',
+                author: 'Randal E. Bryant',
+                publisher: '机械工业出版社'
+            });
+        }
+        
+        function recognizeISBN() {
+            const isbn = document.getElementById('bookIsbn').value;
+            if (!isbn || isbn.length !== 13) {
+                alert('请输入有效的13位ISBN号');
+                return;
+            }
+            // 模拟识别
+            fillBookInfo({
+                title: '数据结构（C语言版）',
+                author: '严蔚敏',
+                publisher: '清华大学出版社'
+            });
+        }
+        
+        function fillBookInfo(info) {
+            document.getElementById('bookTitle').value = info.title;
+            document.getElementById('bookAuthor').value = info.author;
+            document.getElementById('bookPublisher').value = info.publisher;
+            document.getElementById('autoFillBadge').style.display = 'inline';
+        }
+        
+        function showHistory() {
+            alert('从购买历史一键上架功能');
+        }
+        
+        // 回收功能
+        function applyDoorRecycle() {
+            alert('申请上门回收服务');
+        }
+        
+        function showRecyclePoints() {
+            alert('查看附近回收网点');
+        }
+        
+        function saveDraft() {
+            alert('草稿已保存');
+        }
+        
+        // 表单提交
+        document.getElementById('sellForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 简单验证
+            const requiredFields = ['bookTitle', 'bookAuthor', 'bookPrice'];
+            let valid = true;
+            
+            requiredFields.forEach(field => {
+                const value = document.getElementById(field).value.trim();
+                if (!value) {
+                    valid = false;
+                    document.getElementById(field).style.borderColor = '#ef4444';
+                } else {
+                    document.getElementById(field).style.borderColor = '';
+                }
+            });
+            
+            if (uploadedImages.length === 0) {
+                alert('请至少上传1张图片');
+                return;
+            }
+            
+            if (!valid) {
+                alert('请填写必填项');
+                return;
+            }
+            
+            alert('发布成功！您的卖书帖已提交审核。');
+        });
+    </script>
+    <script src="js/app.js"></script>
+</body>
+</html>
